@@ -1,17 +1,26 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image"; 
 import { Menu, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
-interface HeaderProps {
-  isScrolled: boolean;
-}
-
-export default function Header({ isScrolled }: HeaderProps) {
+export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 10) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const getPath = (item: string) => {
     if (item === "Home") return "/";
@@ -23,68 +32,66 @@ export default function Header({ isScrolled }: HeaderProps) {
     <header
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-black/90 backdrop-blur-xl shadow-lg border-b border-white/10"
-          : "bg-black"
+          ? "bg-white/80 backdrop-blur-md shadow-sm border-b border-gray-200"
+          : "bg-transparent"
       }`}
     >
-      <div className="container mx-auto px-4 py-4">
+      <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
           
-          {/* LOGO SECTION - Fix: logo.jpg public folder-la irukanum */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative w-10 h-10 overflow-hidden rounded-lg bg-white shadow-md">
+          <Link href="/" className="flex items-center gap-3 group ml-8 md:ml-16">
+            <div className="flex-shrink-0 flex items-center">
               <Image 
-                src="/logo.jpg" // Renamed 4.jpg to logo.jpg
+                src="/logo.png"  
                 alt="Hynox Campus Logo"
-                fill
+                width={50} 
+                height={50}
                 priority
-                className="object-contain transition-transform duration-300 group-hover:scale-110"
+                className="w-auto h-10 md:h-12 object-contain transition-transform duration-300 group-hover:scale-105"
               />
             </div>
-            <div className="flex flex-col">
-              <span className="font-bold text-lg text-white leading-none tracking-tight">
-                Hynox
-              </span> <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#00C365]">
-                Campus
-              </span>
-              
-            </div>
+            
+            {/* Hynox Campus Text ah thirumba add panniyachu */}
+               <div className="flex flex-col justify-center">
+  {/* text-base ah text-sm nu maathiyachu */}
+  <span className="font-black text-sm text-black leading-none tracking-tighter uppercase">
+    Hynox
+  </span> 
+  {/* text-[8px] ah text-[7px] nu adjust pannirukom */}
+  <span className="text-[7px] font-bold uppercase tracking-[0.35em] text-[#00C365] mt-0.5 pl-0.5">
+    Campus
+  </span>
+</div>
           </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
-            <Link href="/" className="text-sm font-medium text-gray-300 hover:text-[#00C365] transition-colors">Home</Link>
-            <Link href="/about" className="text-sm font-medium text-gray-300 hover:text-[#00C365] transition-colors">About</Link>
-            <Link href="/programs" className="text-sm font-medium text-gray-300 hover:text-[#00C365] transition-colors">Programs</Link>
-            <Link href="/contact" className="text-sm font-medium text-gray-300 hover:text-[#00C365] transition-colors">Contact</Link>
+            <Link href="/" className="text-sm font-medium text-black hover:text-[#00C365] transition-colors">Home</Link>
+            <Link href="/about" className="text-sm font-medium text-black hover:text-[#00C365] transition-colors">About</Link>
+            <Link href="/programs" className="text-sm font-medium text-black hover:text-[#00C365] transition-colors">Programs</Link>
+            <Link href="/contact" className="text-sm font-medium text-black hover:text-[#00C365] transition-colors">Contact</Link>
           </nav>
 
           <div className="flex items-center gap-3">
-            <Button
-              variant="outline"
-              className="hidden sm:inline-flex text-white border-white/20 hover:bg-white/10 bg-transparent hover:text-[#00C365] transition-all rounded-full"
-            >
-              Sign In
-            </Button>
-            
             <button 
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)} 
-              className="md:hidden text-white"
+              className="md:hidden text-black hover:text-[#00C365] transition-colors"
             >
-              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
           </div>
         </div>
 
+        {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className="md:hidden mt-4 pb-6 border-t border-white/10 bg-[#0f111a] rounded-b-3xl absolute left-0 w-full px-6 shadow-2xl animate-in slide-in-from-top duration-300">
+          <div className="md:hidden mt-4 pb-6 border-t border-gray-200 bg-white/95 backdrop-blur-xl rounded-b-3xl absolute left-0 w-full px-6 shadow-2xl animate-in slide-in-from-top duration-300">
             <nav className="flex flex-col gap-4 py-6">
               {["Home", "About", "Programs", "Contact"].map((item) => (
                 <Link
                   key={item}
                   href={getPath(item)}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="text-lg font-bold text-gray-300 hover:text-[#00C365] transition-colors"
+                  className="text-lg font-bold text-black hover:text-[#00C365] transition-colors border-b border-gray-100 pb-2"
                 >
                   {item}
                 </Link>

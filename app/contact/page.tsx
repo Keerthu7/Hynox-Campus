@@ -201,7 +201,7 @@ export default function ContactPage() {
               <div className="flex items-center justify-center w-12 h-12 text-slate-900 border-2 border-slate-900 rounded-xl">
                 <Phone size={22} />
               </div>
-              <span className="font-bold text-slate-900">(+91) 7806904177</span>
+              <span className="font-bold text-slate-900">(+91) 9345558938</span>
             </div>
 
             <div 
@@ -212,7 +212,7 @@ export default function ContactPage() {
               <div className="flex items-center justify-center w-12 h-12 text-slate-900 border-2 border-slate-900 rounded-xl">
                 <Mail size={22} />
               </div>
-              <span className="font-bold text-slate-900">hello@hynoxcampus.in</span>
+              <span className="font-bold text-slate-900">hello.hynox@gmail.com</span>
             </div>
 
             <div 
@@ -223,7 +223,7 @@ export default function ContactPage() {
               <div className="flex items-center justify-center w-12 h-12 text-slate-900 border-2 border-slate-900 rounded-xl">
                 <MapPin size={22} />
               </div>
-              <span className="font-bold text-slate-900">Bangalore, Coimbatore</span>
+              <span className="font-bold text-slate-900">Coimbatore</span>
             </div>
           </div>
         </div>

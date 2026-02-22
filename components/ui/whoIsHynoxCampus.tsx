@@ -1,9 +1,10 @@
 "use client"
 
 import { useEffect } from "react"
-import { Search, Compass, Hammer, Briefcase as BriefcaseIcon, LucideIcon, CheckCircle2 } from "lucide-react"
+import { Search, Compass, Hammer, Briefcase as BriefcaseIcon, LucideIcon, CheckCircle2, ArrowRight } from "lucide-react"
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import Link from "next/link"; 
 
 // --- Data Types ---
 interface AudienceCardItem {
@@ -12,6 +13,7 @@ interface AudienceCardItem {
   subtitle?: string
   description: string
   points: string[]
+  link: string 
 }
 
 interface WorkflowStepItem {
@@ -32,6 +34,8 @@ const audienceData: AudienceCardItem[] = [
       "Building logical thinking",
       "NEP 2020 aligned",
     ],
+    // Points directly to your programs/page.tsx
+    link: "/programs", 
   },
   {
     emoji: "🎓",
@@ -43,6 +47,8 @@ const audienceData: AudienceCardItem[] = [
       "Live projects & internships",
       "Placement-oriented",
     ],
+    // Points directly to your programs/page.tsx
+    link: "/programs", 
   },
   {
     emoji: "🚀",
@@ -54,6 +60,8 @@ const audienceData: AudienceCardItem[] = [
       "Practical tech programs",
       "Learn by building products",
     ],
+    // Points directly to your programs/page.tsx
+    link: "/programs", 
   },
 ]
 
@@ -93,7 +101,7 @@ export default function AudienceSection() {
 
   return (
     <>
-      {/* ================= SECTION 1: Audiences (Updated Background) ================= */}
+      {/* ================= SECTION 1: Audiences ================= */}
       <section className="py-20 bg-white text-gray-900 font-poppins relative overflow-hidden">
         
         {/* Decorative Blur */}
@@ -115,7 +123,6 @@ export default function AudienceSection() {
                 key={index}
                 data-aos="fade-up"
                 data-aos-delay={index * 150}
-                /* Updated to Deep Navy (#1a2138) with premium rounded corners */
                 className="group bg-[#1a2138] rounded-[32px] p-8 flex flex-col h-full shadow-2xl border border-white/5 transition-all duration-500 hover:-translate-y-2 relative overflow-hidden"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none" />
@@ -129,7 +136,6 @@ export default function AudienceSection() {
                       </span>
                     )}
                   </div>
-                  {/* Updated text to White for contrast on Navy background */}
                   <h3 className="text-xl font-bold mb-2 text-white group-hover:text-[#00C365] transition-colors">
                     {item.title}
                   </h3>
@@ -140,7 +146,7 @@ export default function AudienceSection() {
 
                 <div className="h-px w-full bg-white/10 mb-6" />
 
-                <ul className="space-y-4 flex-grow relative z-10">
+                <ul className="space-y-4 flex-grow relative z-10 mb-8">
                   {item.points.map((point, pointIndex) => (
                     <li key={pointIndex} className="flex items-start gap-3">
                       <CheckCircle2 className="w-4 h-4 text-[#00C365] shrink-0 mt-0.5" />
@@ -150,13 +156,24 @@ export default function AudienceSection() {
                     </li>
                   ))}
                 </ul>
+
+                {/* --- "KNOW MORE" BUTTON --- */}
+                <div className="relative z-10 mt-auto pt-2">
+                  <Link href={item.link}>
+                    <button className="w-full py-3.5 rounded-xl border border-white/10 text-white font-semibold text-sm hover:bg-[#00C365] hover:border-[#00C365] hover:shadow-[0_0_20px_rgba(0,195,101,0.3)] transition-all duration-300 flex items-center justify-center gap-2 group/btn cursor-pointer">
+                      Know More
+                      <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
+                    </button>
+                  </Link>
+                </div>
+
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ================= SECTION 2: Workflow (Unchanged Style) ================= */}
+      {/* ================= SECTION 2: Workflow ================= */}
       <section className="py-20 bg-white text-gray-900 font-poppins relative overflow-hidden">
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
           <div className="text-center md:text-left mb-16" data-aos="fade-right">

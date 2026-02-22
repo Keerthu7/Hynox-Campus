@@ -1,37 +1,39 @@
 "use client"
 
 import { useEffect } from "react"
-import { Palette, Code, BarChart3 } from "lucide-react"
+import { Code, Cloud, Brain } from "lucide-react" // Updated icons to match the new topics
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 
 const streams = [
   {
-    icon: <Palette className="w-6 h-6 text-[#00C365]" />,
-    title: "Design Stream",
-    items: [
-      "UI/UX Design",
-      "Brand Identity",
-      "Digital Creatives",
-      "Portfolio Development"
-    ]
-  },
-  {
     icon: <Code className="w-6 h-6 text-[#00C365]" />,
-    title: "Development Stream",
+    title: "Full-Stack Development",
     items: [
-      "Full Stack Web Development",
-      "Application Deployment",
-      "Real-Time Product Building"
+      "Frontend & Backend Mastery",
+      "Database Management",
+      "API Design & Integration",
+      "Scalable Web Applications"
     ]
   },
   {
-    icon: <BarChart3 className="w-6 h-6 text-[#00C365]" />,
-    title: "Marketing Stream",
+    icon: <Cloud className="w-6 h-6 text-[#00C365]" />,
+    title: "Cloud Computing",
     items: [
-      "Performance Marketing",
-      "Growth Strategy",
-      "Campaign Analytics"
+      "AWS, Azure & GCP",
+      "Cloud Architecture Design",
+      "DevOps & CI/CD Pipelines",
+      "Serverless Deployment"
+    ]
+  },
+  {
+    icon: <Brain className="w-6 h-6 text-[#00C365]" />,
+    title: "AI & Machine Learning",
+    items: [
+      "Machine Learning Models",
+      "Deep Learning & NLP",
+      "Predictive Data Analytics",
+      "AI Application Building"
     ]
   }
 ]

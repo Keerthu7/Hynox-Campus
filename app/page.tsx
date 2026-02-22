@@ -10,8 +10,8 @@ import FinalCTA from "@/components/ui/finalCTA";
 export default function Home() {
   return (
     <>
-      {/* Set isScrolled to false for the initial load view */}
-      <Header isScrolled={false} /> 
+      
+      <Header /> 
       <main>
         <Hero />
         <AudienceSection />

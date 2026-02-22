@@ -7,6 +7,9 @@ import { useScrollAnimation } from "@/hooks/use-scroll-animation"
 export default function CollegeReadinessCta() {
   const [ref, isVisible] = useScrollAnimation()
 
+  // Your official Calendly booking link
+  const meetingLink = "https://calendly.com/hello-hynox/30min"
+
   return (
     <section 
       ref={ref}
@@ -53,7 +56,9 @@ export default function CollegeReadinessCta() {
         >
           {/* Button 1: Schedule Meeting (Dark Filled) */}
           <Link
-            href="#"
+            href={meetingLink}
+            target="_blank" // Opens in a new tab
+            rel="noopener noreferrer" // Security best practice for opening new tabs
             className="group relative inline-flex items-center justify-center rounded-full bg-[#2a223a] border border-white/5 px-8 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-[#352b4a] hover:scale-105"
           >
             Schedule Institutional Meeting

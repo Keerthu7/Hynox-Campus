@@ -74,10 +74,7 @@ export default function FinalCTA() {
 
           </div>
 
-          {/* Secondary message */}
-          <p className="text-gray-500 text-sm mt-10" data-aos="fade-in" data-aos-delay="400">
-            Start your industry journey today. <span className="text-gray-300">No application fees for the first 100 students.</span>
-          </p>
+          
         </div>
       </div>
     </section>

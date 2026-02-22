@@ -5,18 +5,8 @@ import SchoolHeader from "@/components/SchoolHeader"
 import Footer from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { 
-  BookOpen, 
-  Users, 
-  Lightbulb, 
-  BarChart3, 
-  Award, 
-  Compass, 
-  Brain, 
-  Cpu, 
-  Trophy,
-  Lock,
-  X,
-  Loader2
+  BookOpen, Users, Lightbulb, BarChart3, Award, 
+  Compass, Brain, Cpu, Trophy, Lock, X, Loader2, CheckCircle
 } from "lucide-react"
 import {
   Accordion,
@@ -30,6 +20,7 @@ import WhyChooseSection from "@/components/WhyChooseSection"
 import BenefitsSection from "@/components/BenefitsSection"
 import ImplementationSection from "@/components/ImplementationSection"
 import CTASection from "@/components/CTASection"
+import ApplyModal from "@/components/ui/apply-modal" 
 
 // --- DATA CONFIGURATION ---
 const aboutFeatures = [
@@ -60,9 +51,12 @@ const sessions = [
 
 export default function SchoolProgramsPage() {
   const [isScrolled, setIsScrolled] = useState(false)
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [formStatus, setFormStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
-  const [formData, setFormData] = useState({ username: '', email: '', phone: '' })
+  const [isApplyModalOpen, setIsApplyModalOpen] = useState(false) // Student SignIn
+  const [isPartnerModalOpen, setIsPartnerModalOpen] = useState(false) // School Form
+  const [isUnlocked, setIsUnlocked] = useState(false) 
+  
+  const [formStatus, setFormStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [formData, setFormData] = useState({ username: '', email: '', phone: '' });
 
   useEffect(() => {
     AOS.init({ duration: 1000, once: true, easing: 'ease-out-cubic' })
@@ -71,11 +65,7 @@ export default function SchoolProgramsPage() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handlePartnerSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormStatus('loading');
     try {
@@ -87,12 +77,8 @@ export default function SchoolProgramsPage() {
       if (response.ok) {
         setFormStatus('success');
         setFormData({ username: '', email: '', phone: '' });
-      } else {
-        setFormStatus('error');
-      }
-    } catch (error) {
-      setFormStatus('error');
-    }
+      } else { setFormStatus('error'); }
+    } catch (error) { setFormStatus('error'); }
   };
 
   return (
@@ -109,10 +95,9 @@ export default function SchoolProgramsPage() {
 
       <SchoolHeader isScrolled={isScrolled} />
 
-      {/* flex-grow ensures Footer stays at the very bottom */}
       <main className="relative z-10 flex-grow">
         
-        {/* HERO SECTION - ANIMATED SEQUENTIALLY */}
+        {/* HERO SECTION */}
         <section className="pt-40 pb-20 flex items-center justify-center px-4">
           <div className="w-full max-w-4xl bg-[#0f111a] border border-slate-800 rounded-[40px] p-10 md:p-16 text-center relative shadow-2xl overflow-hidden" data-aos="zoom-in-up">
             <div className="relative z-10">
@@ -120,13 +105,13 @@ export default function SchoolProgramsPage() {
               <h1 className="text-[32px] md:text-[56px] font-bold text-white leading-[1.1] mb-8" data-aos="fade-up" data-aos-delay="200">Preparing Students for <br /><span className="text-[#00C365]">Careers Beyond Marks</span></h1>
               <p className="text-[#94a3b8] text-base md:text-xl font-medium mb-12" data-aos="fade-up" data-aos-delay="400">A Structured 4-Week STEM Future Skills Program for Schools (Classes 8-12)</p>
               <div data-aos="fade-up" data-aos-delay="600">
-                <Button onClick={() => setIsModalOpen(true)} className="h-12 px-8 rounded-full bg-white/10 border border-white/10 text-white hover:bg-[#00C365] font-bold transition-all">Request School Partnership</Button>
+                <Button onClick={() => setIsPartnerModalOpen(true)} className="h-12 px-8 rounded-full bg-white/10 border border-white/10 text-white hover:bg-[#00C365] font-bold transition-all">Request School Partnership</Button>
               </div>
             </div>
           </div>
         </section>
 
-        {/* ABOUT SECTION - STAGGERED CARDS */}
+        {/* ABOUT SECTION */}
         <section id="about" className="py-20">
           <div className="container mx-auto px-4 max-w-6xl text-center">
             <h2 className="text-3xl md:text-[42px] font-bold text-[#0F172A] mb-12" data-aos="fade-up">What is Hynox Campus?</h2>
@@ -178,20 +163,40 @@ export default function SchoolProgramsPage() {
               {sessions.map((session, idx) => (
                 <AccordionItem key={session.id} value={session.id} data-aos="fade-up" data-aos-delay={idx * 100} className="rounded-[32px] border border-white/5 bg-[#1a2138] overflow-hidden shadow-2xl transition-all">
                   <AccordionTrigger className="px-8 py-6 text-left text-base font-bold text-white hover:text-[#00C365] hover:no-underline">
-                    {session.title}
-                  </AccordionTrigger>
-                  <AccordionContent className="px-8 pb-8 relative select-none">
-                    <div className="grid gap-8 md:grid-cols-3 pt-6 border-t border-white/10 blur-[6px] opacity-40 pointer-events-none">
-                      <div><h4 className="mb-3 text-[11px] font-black uppercase text-[#00C365]">Topics</h4></div>
-                      <div><h4 className="mb-3 text-[11px] font-black uppercase text-[#FFB800]">Activities</h4></div>
-                      <div><h4 className="mb-3 text-[11px] font-black uppercase text-white">Outcomes</h4></div>
+                    <div className="flex items-center gap-3">
+                      {session.title}
+                      {isUnlocked && <CheckCircle className="text-[#00C365] w-5 h-5 animate-in zoom-in" />}
                     </div>
-                    <button onClick={() => setIsModalOpen(true)} className="absolute inset-0 z-20 flex items-center justify-center group/lock">
-                      <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-full px-6 py-3 flex items-center gap-3 transition-all hover:scale-105">
-                        <Lock size={16} className="text-[#00C365]" />
-                        <span className="text-white text-[11px] font-bold uppercase tracking-[0.2em]">Partner to Unlock</span>
+                  </AccordionTrigger>
+                  <AccordionContent className="px-8 pb-8 relative">
+                    <div className={`grid gap-8 md:grid-cols-3 pt-6 border-t border-white/10 transition-all duration-700 ${!isUnlocked ? "blur-[10px] opacity-30 select-none pointer-events-none" : "blur-0 opacity-100"}`}>
+                      <div>
+                        <h4 className="mb-3 text-[11px] font-black uppercase text-[#00C365]">Topics</h4>
+                        <ul className="text-slate-400 text-sm space-y-1">
+                          {session.topics.map(t => <li key={t}>• {t}</li>)}
+                        </ul>
                       </div>
-                    </button>
+                      <div>
+                        <h4 className="mb-3 text-[11px] font-black uppercase text-[#FFB800]">Activities</h4>
+                        <ul className="text-slate-400 text-sm space-y-1">
+                          {session.activities.map(a => <li key={a}>• {a}</li>)}
+                        </ul>
+                      </div>
+                      <div>
+                        <h4 className="mb-3 text-[11px] font-black uppercase text-white">Outcomes</h4>
+                        <ul className="text-slate-400 text-sm space-y-1">
+                          {session.outcomes.map(o => <li key={o}>• {o}</li>)}
+                        </ul>
+                      </div>
+                    </div>
+                    {!isUnlocked && (
+                      <div className="absolute inset-0 z-20 flex items-center justify-center">
+                        <button onClick={() => setIsApplyModalOpen(true)} className="bg-white/5 backdrop-blur-md border border-white/10 rounded-full px-6 py-3 flex items-center gap-3 transition-all hover:scale-105 shadow-xl">
+                          <Lock size={16} className="text-[#00C365]" />
+                          <span className="text-white text-[11px] font-bold uppercase tracking-[0.2em]">SignIn to Unlock</span>
+                        </button>
+                      </div>
+                    )}
                   </AccordionContent>
                 </AccordionItem>
               ))}
@@ -202,35 +207,38 @@ export default function SchoolProgramsPage() {
         <WhyChooseSection />
         <BenefitsSection />
         <ImplementationSection />
-        <CTASection onPartnerClick={() => setIsModalOpen(true)} />
+        <CTASection onPartnerClick={() => setIsPartnerModalOpen(true)} />
       </main>
 
-      {/* FOOTER - Clean Placement */}
       <Footer />
 
-      {/* PARTNERSHIP MODAL */}
-      {isModalOpen && (
+      {/* MODAL 1: STUDENT SIGNIN */}
+      <ApplyModal 
+        isOpen={isApplyModalOpen} 
+        onClose={() => setIsApplyModalOpen(false)} 
+        onSuccess={() => setIsUnlocked(true)} 
+      />
+
+      {/* MODAL 2: SCHOOL PARTNERSHIP */}
+      {isPartnerModalOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-          <div className="relative w-full max-w-md bg-[#161b2c] border border-white/10 rounded-[32px] shadow-2xl p-10 animate-in fade-in zoom-in duration-300">
-            <button onClick={() => { setIsModalOpen(false); setFormStatus('idle'); }} className="absolute top-6 right-6 text-slate-400 hover:text-white transition-all hover:rotate-90"><X size={20} /></button>
+          <div className="relative w-full max-w-md bg-[#161b2c] border border-white/10 rounded-2xl p-8 shadow-2xl animate-in zoom-in duration-300">
+            <button onClick={() => { setIsPartnerModalOpen(false); setFormStatus('idle'); }} className="absolute top-6 right-6 text-slate-400 hover:text-white"><X size={24} /></button>
             {formStatus === 'success' ? (
               <div className="text-center py-6">
-                <div className="w-16 h-16 bg-[#00C365]/20 rounded-full flex items-center justify-center mx-auto mb-6 text-[#00C365] text-3xl">✓</div>
-                <h3 className="text-2xl font-bold text-white mb-2 tracking-tight">Application Sent!</h3>
-                <p className="text-slate-400 text-sm leading-relaxed">Message delivered to owner. <br /> We will contact you soon!</p>
-                <Button onClick={() => setIsModalOpen(false)} className="mt-8 bg-[#00C365] w-full text-white font-bold h-12 rounded-xl transition-all active:scale-95 shadow-lg shadow-[#00C365]/20">Close Window</Button>
+                <div className="w-16 h-16 bg-[#00C365]/20 rounded-full flex items-center justify-center mx-auto mb-4 text-[#00C365]">✓</div>
+                <h3 className="text-2xl font-bold text-white mb-2">Thanks for signing!</h3>
+                <p className="text-slate-400">Application delivered. We will contact you soon!</p>
+                <Button onClick={() => setIsPartnerModalOpen(false)} className="mt-6 bg-[#00C365] w-full rounded-xl h-12">Close</Button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <div>
-                  <h3 className="text-2xl font-bold text-white mb-2">School Partnership</h3>
-                  <p className="text-slate-500 text-xs uppercase tracking-widest font-black mb-6">Collaboration Inquiry</p>
-                </div>
-                <input required name="username" value={formData.username} onChange={handleInputChange} placeholder="School Name" className="w-full bg-[#0f111a] border border-white/10 rounded-xl px-5 py-3 text-white focus:border-[#00C365] outline-none transition-all placeholder:text-slate-600" />
-                <input required name="email" type="email" value={formData.email} onChange={handleInputChange} placeholder="Admin Email" className="w-full bg-[#0f111a] border border-white/10 rounded-xl px-5 py-3 text-white focus:border-[#00C365] outline-none transition-all placeholder:text-slate-600" />
-                <input required name="phone" type="tel" value={formData.phone} onChange={handleInputChange} placeholder="Official Phone" className="w-full bg-[#0f111a] border border-white/10 rounded-xl px-5 py-3 text-white focus:border-[#00C365] outline-none transition-all placeholder:text-slate-600" />
-                <Button type="submit" disabled={formStatus === 'loading'} className="w-full bg-[#00C365] text-white font-bold h-14 rounded-xl mt-4 shadow-xl shadow-[#00C365]/20 active:scale-95 transition-all">
-                  {formStatus === 'loading' ? <Loader2 className="animate-spin" /> : "Send Partnership Request"}
+              <form onSubmit={handlePartnerSubmit} className="space-y-4">
+                <h3 className="text-2xl font-bold text-white mb-6">School Partnership</h3>
+                <input required placeholder="School Name" className="w-full bg-[#0f111a] border border-white/10 rounded-xl px-4 py-3 text-white focus:border-[#00C365] outline-none" value={formData.username} onChange={(e) => setFormData({...formData, username: e.target.value})} />
+                <input required type="email" placeholder="Email" className="w-full bg-[#0f111a] border border-white/10 rounded-xl px-4 py-3 text-white focus:border-[#00C365] outline-none" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} />
+                <input required type="tel" placeholder="Phone" className="w-full bg-[#0f111a] border border-white/10 rounded-xl px-4 py-3 text-white focus:border-[#00C365] outline-none" value={formData.phone} onChange={(e) => setFormData({...formData, phone: e.target.value})} />
+                <Button type="submit" disabled={formStatus === 'loading'} className="w-full bg-[#00C365] font-bold h-12 rounded-xl mt-4">
+                  {formStatus === 'loading' ? <Loader2 className="animate-spin" /> : "Submit Partnership Request"}
                 </Button>
               </form>
             )}

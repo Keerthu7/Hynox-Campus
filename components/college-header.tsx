@@ -1,17 +1,14 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
-import Image from "next/image" // Import for the logo image
+import Image from "next/image" 
 import { Menu, X, Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
-interface CollegeHeaderProps {
-  isScrolled: boolean;
-}
-
-export default function CollegeHeader({ isScrolled }: CollegeHeaderProps) {
+export default function CollegeHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false); // Local scroll state
   
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formStatus, setFormStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
@@ -20,6 +17,20 @@ export default function CollegeHeader({ isScrolled }: CollegeHeaderProps) {
     email: '',
     phone: ''
   });
+
+  // --- SCROLL TRACK LOGIC ---
+  useEffect(() => {
+    const handleScrollEvent = () => {
+      if (window.scrollY > 10) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScrollEvent);
+    return () => window.removeEventListener("scroll", handleScrollEvent);
+  }, []);
 
   const navItems = [
     { name: "Home", href: "/" },
@@ -67,28 +78,39 @@ export default function CollegeHeader({ isScrolled }: CollegeHeaderProps) {
     <>
       <header
         className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-          isScrolled ? "bg-black/90 backdrop-blur-xl shadow-lg border-b border-white/10 py-3" : "bg-black py-5"
+          isScrolled 
+            ? "bg-white/80 backdrop-blur-md shadow-sm border-b border-gray-200 py-3" // Light glass effect on scroll
+            : "bg-transparent py-5" // Transparent at top
         }`}
       >
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between">
             
             {/* --- UPDATED LOGO SECTION --- */}
-            <Link href="/" className="flex items-center gap-3 group">
-              <div className="relative w-10 h-10 overflow-hidden rounded-lg bg-white shadow-md">
-                <Image 
-                  src="/logo.jpg" // Renamed from 4.jpg.jpeg for clarity
-                  alt="Hynox Campus Logo"
-                  fill
-                  priority
-                  className="object-contain transition-transform duration-300 group-hover:scale-110"
-                />
-              </div>
-              <div className="flex flex-col">
-                <span className="font-bold text-lg text-white leading-none tracking-tight">Hynox</span>
-                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#00C365]">Campus</span>
-              </div>
-            </Link>
+            <Link href="/" className="flex items-center gap-3 group ml-8 md:ml-16">
+            <div className="flex-shrink-0 flex items-center">
+              <Image 
+                src="/logo.png"  
+                alt="Hynox Campus Logo"
+                width={50} 
+                height={50}
+                priority
+                className="w-auto h-10 md:h-12 object-contain transition-transform duration-300 group-hover:scale-105"
+              />
+            </div>
+            
+            {/* Hynox Campus Text ah thirumba add panniyachu */}
+               <div className="flex flex-col justify-center">
+  {/* text-base ah text-sm nu maathiyachu */}
+  <span className="font-black text-sm text-black leading-none tracking-tighter uppercase">
+    Hynox
+  </span> 
+  {/* text-[8px] ah text-[7px] nu adjust pannirukom */}
+  <span className="text-[7px] font-bold uppercase tracking-[0.35em] text-[#00C365] mt-0.5 pl-0.5">
+    Campus
+  </span>
+</div>
+          </Link>
 
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center gap-8">
@@ -97,7 +119,7 @@ export default function CollegeHeader({ isScrolled }: CollegeHeaderProps) {
                   key={item.name}
                   href={item.href}
                   onClick={(e) => handleScroll(e, item.href)}
-                  className="text-sm font-medium text-gray-300 hover:text-[#00C365] transition-colors"
+                  className="text-sm font-medium text-black hover:text-[#00C365] transition-colors"
                 >
                   {item.name}
                 </Link>
@@ -108,26 +130,26 @@ export default function CollegeHeader({ isScrolled }: CollegeHeaderProps) {
             <div className="flex items-center gap-3">
               <Button 
                 onClick={() => setIsModalOpen(true)}
-                className="hidden sm:inline-flex rounded-full bg-white/5 hover:bg-[#00C365] text-white border border-white/10 px-6 font-bold transition-all duration-300"
+                className="hidden sm:inline-flex rounded-full bg-[#00C365] hover:bg-[#00ad58] text-white border border-transparent px-6 font-bold transition-all duration-300 shadow-[0_0_15px_rgba(0,195,101,0.3)]"
               >
                 Partner With Us
               </Button>
-              <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="lg:hidden text-white ml-2">
-                {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="lg:hidden text-black ml-2 hover:text-[#00C365]">
+                {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
               </button>
             </div>
           </div>
 
           {/* Mobile Menu */}
           {mobileMenuOpen && (
-            <div className="lg:hidden mt-4 pb-6 border-t border-white/10 bg-black rounded-b-3xl absolute left-0 w-full px-6 shadow-2xl animate-in slide-in-from-top duration-300">
+            <div className="lg:hidden mt-4 pb-6 border-t border-gray-200 bg-white/90 backdrop-blur-md rounded-b-3xl absolute left-0 w-full px-6 shadow-2xl animate-in slide-in-from-top duration-300">
               <nav className="flex flex-col gap-4 py-6">
                 {navItems.map((item) => (
-                  <Link key={item.name} href={item.href} onClick={(e) => handleScroll(e, item.href)} className="text-lg font-bold text-gray-300 hover:text-[#00C365]">
+                  <Link key={item.name} href={item.href} onClick={(e) => handleScroll(e, item.href)} className="text-lg font-bold text-black hover:text-[#00C365] border-b border-gray-100 py-2">
                     {item.name}
                   </Link>
                 ))}
-                <Button onClick={() => { setMobileMenuOpen(false); setIsModalOpen(true); }} className="w-full bg-[#00C365] text-white font-bold h-12 rounded-xl mt-4">
+                <Button onClick={() => { setMobileMenuOpen(false); setIsModalOpen(true); }} className="w-full bg-[#00C365] hover:bg-[#00ad58] text-white font-bold h-12 rounded-xl mt-4">
                   Partner With Us
                 </Button>
               </nav>
@@ -136,7 +158,7 @@ export default function CollegeHeader({ isScrolled }: CollegeHeaderProps) {
         </div>
       </header>
 
-      {/* --- PARTNER MODAL --- */}
+      {/* --- PARTNER MODAL --- (Kept Dark) */}
       {isModalOpen && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
           <div className="relative w-full max-w-md bg-[#161b2c] border border-white/10 rounded-[32px] shadow-2xl p-10 animate-in fade-in zoom-in duration-300">
@@ -149,7 +171,7 @@ export default function CollegeHeader({ isScrolled }: CollegeHeaderProps) {
                 <div className="w-16 h-16 bg-[#00C365]/20 rounded-full flex items-center justify-center mx-auto mb-6 text-[#00C365] text-3xl">✓</div>
                 <h3 className="text-2xl font-bold text-white mb-2">Message Sent!</h3>
                 <p className="text-slate-400">Application delivered. We will contact you soon!</p>
-                <Button onClick={() => setIsModalOpen(false)} className="mt-8 bg-[#00C365] w-full text-white font-bold h-12 rounded-xl">Close</Button>
+                <Button onClick={() => setIsModalOpen(false)} className="mt-8 bg-[#00C365] hover:bg-[#00ad58] w-full text-white font-bold h-12 rounded-xl">Close</Button>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-5">
@@ -157,7 +179,7 @@ export default function CollegeHeader({ isScrolled }: CollegeHeaderProps) {
                 <input required name="username" value={formData.username} onChange={handleInputChange} placeholder="College Name" className="w-full bg-[#0f111a] border border-white/10 rounded-xl px-5 py-3 text-white focus:border-[#00C365] outline-none" />
                 <input required name="email" type="email" value={formData.email} onChange={handleInputChange} placeholder="Admin Email" className="w-full bg-[#0f111a] border border-white/10 rounded-xl px-5 py-3 text-white focus:border-[#00C365] outline-none" />
                 <input required name="phone" type="tel" value={formData.phone} onChange={handleInputChange} placeholder="Official Phone" className="w-full bg-[#0f111a] border border-white/10 rounded-xl px-5 py-3 text-white focus:border-[#00C365] outline-none" />
-                <Button type="submit" disabled={formStatus === 'loading'} className="w-full bg-[#00C365] text-white font-bold h-14 rounded-xl mt-4 shadow-xl shadow-[#00C365]/20 active:scale-95 transition-all">
+                <Button type="submit" disabled={formStatus === 'loading'} className="w-full bg-[#00C365] hover:bg-[#00ad58] text-white font-bold h-14 rounded-xl mt-4 shadow-xl shadow-[#00C365]/20 active:scale-95 transition-all">
                   {formStatus === 'loading' ? <Loader2 className="animate-spin" /> : "Send Request"}
                 </Button>
               </form>

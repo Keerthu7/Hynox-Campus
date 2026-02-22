@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion, Variants } from "framer-motion"; // Added Variants type import
+import { motion, Variants } from "framer-motion"; 
 import { CheckCircle2 } from "lucide-react";
 
 // --- DATA CONFIGURATION ---
@@ -16,7 +16,11 @@ const months = [
     subtitle: "Skill Immersion",
     points: ["Technology Fundamentals", "Critical Problem Solving", "Hands-on Workshop"],
   },
-  // Add other months as needed
+  {
+    title: "Month 3",
+    subtitle: "Project Building & Portfolio",
+    points: ["Real-world Project Execution", "Industry Best Practices", "Portfolio Creation"],
+  },
 ];
 
 // --- ANIMATION VARIANTS ---
@@ -28,7 +32,7 @@ const textVariants: Variants = {
     y: 0,
     transition: {
       duration: 0.5,
-      ease: "easeOut", // Now correctly typed
+      ease: "easeOut", 
     },
   },
 };
@@ -55,7 +59,7 @@ export default function TrainingPhase() {
         </div>
 
         <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -68,7 +72,6 @@ export default function TrainingPhase() {
               variants={textVariants}
             >
               <div className="relative z-10">
-                {/* Error occurred here - motion.p now uses corrected textVariants */}
                 <motion.p 
                   variants={textVariants} 
                   className="mb-2 text-xs font-bold uppercase tracking-wider text-[#00C365]"

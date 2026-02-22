@@ -1,13 +1,14 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import Image from "next/image" // Import Next.js Image component
-import { Menu, X, Loader2 } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { Menu, X, Loader2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
-export default function SchoolHeader({ isScrolled }: { isScrolled: boolean }) {
+export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   // Modal & Form States
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -18,6 +19,20 @@ export default function SchoolHeader({ isScrolled }: { isScrolled: boolean }) {
     phone: ''
   });
 
+  // --- SCROLL TRACK LOGIC ---
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 10) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const navItems = [
     { name: "Home", href: "/" },
     { name: "About", href: "#about" },
@@ -27,7 +42,7 @@ export default function SchoolHeader({ isScrolled }: { isScrolled: boolean }) {
   ];
 
   // --- SMOOTH SCROLL LOGIC ---
-  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, href: string) => {
+  const handleScrollClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, href: string) => {
     if (href.startsWith("#")) {
       e.preventDefault();
       const targetId = href.replace("#", "");
@@ -73,30 +88,36 @@ export default function SchoolHeader({ isScrolled }: { isScrolled: boolean }) {
     <>
       <header 
         className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-          isScrolled ? "bg-black/90 backdrop-blur-md py-3 shadow-lg border-b border-white/5" : "bg-black py-5"
+          isScrolled 
+            ? "bg-white/80 backdrop-blur-md py-3 shadow-sm border-b border-gray-200" 
+            : "bg-transparent py-5" 
         }`}
       >
         <div className="container mx-auto px-4 flex items-center justify-between">
           
-          {/* LOGO SECTION - Updated with your Image */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative w-10 h-10 overflow-hidden rounded-lg bg-white">
+         <Link href="/" className="flex items-center gap-3 group ml-8 md:ml-16">
+            <div className="flex-shrink-0 flex items-center">
               <Image 
-                src="/logo.jpg" // Put your logo file in the /public folder and rename it logo.jpg
+                src="/logo.png"  
                 alt="Hynox Campus Logo"
-                fill
-                priority // Ensures the logo loads immediately
-                className="object-contain transition-transform duration-300 group-hover:scale-110"
+                width={50} 
+                height={50}
+                priority
+                className="w-auto h-10 md:h-12 object-contain transition-transform duration-300 group-hover:scale-105"
               />
             </div>
-            <div className="flex flex-col">
-              <span className="font-bold text-lg text-white leading-none tracking-tight font-poppins">
-                Hynox
-              </span>
-              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#00C365]">
-                Campus
-              </span>
-            </div>
+            
+            {/* Hynox Campus Text ah thirumba add panniyachu */}
+               <div className="flex flex-col justify-center">
+  {/* text-base ah text-sm nu maathiyachu */}
+  <span className="font-black text-sm text-black leading-none tracking-tighter uppercase">
+    Hynox
+  </span> 
+  {/* text-[8px] ah text-[7px] nu adjust pannirukom */}
+  <span className="text-[7px] font-bold uppercase tracking-[0.35em] text-[#00C365] mt-0.5 pl-0.5">
+    Campus
+  </span>
+</div>
           </Link>
 
           {/* Desktop Nav */}
@@ -105,19 +126,19 @@ export default function SchoolHeader({ isScrolled }: { isScrolled: boolean }) {
               <Link 
                 key={item.name} 
                 href={item.href}
-                onClick={(e) => handleScroll(e, item.href)}
-                className="text-sm font-medium text-gray-300 hover:text-[#00C365] transition-colors"
+                onClick={(e) => handleScrollClick(e, item.href)}
+                className="text-sm font-medium text-black hover:text-[#00C365] transition-colors"
               >
                 {item.name}
               </Link>
             ))}
           </nav>
 
-          {/* Action Button */}
+          {/* Action Button & Mobile Menu Toggle */}
           <div className="flex items-center gap-4">
             <Button 
               onClick={() => setIsModalOpen(true)}
-              className="bg-[#00C365] hover:bg-[#00ad58] text-white font-bold rounded-xl px-6 transition-all active:scale-95 shadow-[0_0_15px_rgba(0,195,101,0.3)]"
+              className="bg-[#00C365] hover:bg-[#00ad58] text-white font-bold rounded-xl px-6 transition-all active:scale-95 shadow-[0_0_15px_rgba(0,195,101,0.3)] hidden sm:flex"
             >
               Partner With Us
             </Button>
@@ -125,7 +146,7 @@ export default function SchoolHeader({ isScrolled }: { isScrolled: boolean }) {
             {/* Mobile Toggle */}
             <button 
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)} 
-              className="lg:hidden text-white transition-colors hover:text-[#00C365]"
+              className="lg:hidden text-black transition-colors hover:text-[#00C365]"
             >
               {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
@@ -134,18 +155,27 @@ export default function SchoolHeader({ isScrolled }: { isScrolled: boolean }) {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="lg:hidden bg-black border-t border-white/10 px-4 py-6 absolute w-full left-0 animate-in slide-in-from-top duration-300 shadow-2xl">
+          <div className="lg:hidden bg-white/95 backdrop-blur-md border-t border-gray-200 px-4 py-6 absolute w-full left-0 animate-in slide-in-from-top duration-300 shadow-2xl rounded-b-3xl">
             <nav className="flex flex-col gap-4">
               {navItems.map((item) => (
                 <Link 
                   key={item.name} 
                   href={item.href}
-                  onClick={(e) => handleScroll(e, item.href)}
-                  className="text-lg font-medium text-gray-300 hover:text-[#00C365] py-2 border-b border-white/5"
+                  onClick={(e) => handleScrollClick(e, item.href)}
+                  className="text-lg font-bold text-black hover:text-[#00C365] py-2 border-b border-gray-100"
                 >
                   {item.name}
                 </Link>
               ))}
+              <Button 
+                onClick={() => {
+                  setIsModalOpen(true);
+                  setMobileMenuOpen(false);
+                }}
+                className="bg-[#00C365] hover:bg-[#00ad58] text-white font-bold rounded-xl w-full h-12 mt-2 transition-all active:scale-95 sm:hidden"
+              >
+                Partner With Us
+              </Button>
             </nav>
           </div>
         )}
@@ -169,7 +199,7 @@ export default function SchoolHeader({ isScrolled }: { isScrolled: boolean }) {
                 <p className="text-slate-400">Application delivered. We will contact you soon!</p>
                 <Button 
                   onClick={() => { setIsModalOpen(false); setFormStatus('idle'); }}
-                  className="mt-6 bg-[#00C365] text-white w-full rounded-xl h-12"
+                  className="mt-6 bg-[#00C365] hover:bg-[#00ad58] text-white w-full rounded-xl h-12"
                 >
                   Close
                 </Button>

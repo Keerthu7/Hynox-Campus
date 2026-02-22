@@ -48,8 +48,6 @@ export default function Hero() {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 pt-2">
-                
-                {/* 🔥 CHANGE HERE: Link href updated to "/programs" */}
                 <Link href="/programs">
                   <Button
                     className="h-12 px-8 rounded-lg bg-[#00C365] hover:bg-[#00A855] text-white border-none text-base font-medium shadow-[0_4px_20px_rgba(0,195,101,0.25)] transition-all w-full sm:w-auto"
@@ -82,9 +80,10 @@ export default function Hero() {
             >
               <div className="relative p-2 rounded-3xl border border-[#00C365]/20 w-full max-w-[600px] bg-white shadow-xl">
                   <div className="relative h-[350px] lg:h-[400px] w-full overflow-hidden rounded-2xl bg-gray-100">
+                      {/* CHANGED IMAGE HERE: Realistic, clear faces, natural campus interaction */}
                       <Image 
-                          src="https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=2670&auto=format&fit=crop" 
-                          alt="Students collaborating"
+                          src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2670&auto=format&fit=crop" 
+                          alt="Students with clear faces collaborating"
                           fill
                           className="object-cover hover:scale-105 transition-all duration-700"
                           priority

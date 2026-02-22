@@ -22,6 +22,10 @@ export default function CTASection({ onPartnerClick }: CTASectionProps) {
     })
   }, [])
 
+  // 👇 ADDED UTM PARAMETERS TO THE URL 👇
+  // utm_campaign=school_page tells Calendly exactly where they clicked from
+  const meetingLink = "https://calendly.com/hello-hynox/30min?utm_source=website&utm_campaign=school_page"
+
   return (
     <section className="relative py-24 bg-[#0F172A] overflow-hidden">
       
@@ -65,6 +69,7 @@ export default function CTASection({ onPartnerClick }: CTASectionProps) {
         >
           {/* Green Button (Schedule a Call) */}
           <Button 
+            onClick={() => window.open(meetingLink, "_blank", "noopener noreferrer")}
             className="h-[52px] px-8 bg-[#00C365] hover:bg-[#00b05b] text-white font-semibold text-[15px] rounded-xl 
                        shadow-lg shadow-[#00C365]/20 hover:shadow-[#00C365]/40 hover:-translate-y-1 transition-all duration-300"
           >
