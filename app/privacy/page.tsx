@@ -18,7 +18,7 @@ export default function PrivacyPolicyPage() {
 
   return (
     <>
-      <Header isScrolled={isScrolled} />
+      <Header  />
 
       <main className="min-h-screen bg-white text-gray-600 font-poppins pt-32 pb-20">
         <div className="container mx-auto px-6 lg:px-12 max-w-4xl">

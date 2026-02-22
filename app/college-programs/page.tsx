@@ -83,7 +83,7 @@ export default function CollegeProgramsPage() {
       />
 
       {/* HEADER */}
-      <CollegeHeader isScrolled={isScrolled} />
+      <CollegeHeader  />
 
       <main className="flex-grow flex items-center justify-center pt-28 pb-20 px-4 relative z-10">
         

@@ -55,7 +55,7 @@ export default function ContactPage() {
     <div className="flex flex-col min-h-screen font-sans bg-white relative overflow-x-hidden">
       
       {/* --- HEADER --- */}
-      <Header isScrolled={isScrolled} />
+      <Header />
 
       {/* --- MAIN CONTENT AREA --- */}
       <main className="flex-grow pt-32 pb-20 relative">

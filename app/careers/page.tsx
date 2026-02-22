@@ -61,7 +61,7 @@ export default function CareersPage() {
   return (
     <>
       {/* --- HEADER --- */}
-      <Header isScrolled={isScrolled} />
+      <Header  />
 
       {/* --- MAIN CONTENT --- */}
       <main className="min-h-screen bg-white text-gray-600 font-poppins pt-32 pb-20 overflow-hidden">

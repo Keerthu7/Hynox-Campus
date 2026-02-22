@@ -93,7 +93,7 @@ export default function SchoolProgramsPage() {
         }}
       />
 
-      <SchoolHeader isScrolled={isScrolled} />
+      <SchoolHeader  />
 
       <main className="relative z-10 flex-grow">
         

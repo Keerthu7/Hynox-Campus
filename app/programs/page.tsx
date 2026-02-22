@@ -38,7 +38,7 @@ export default function AudiencePage() {
       />
 
       {/* --- HEADER --- */}
-      <Header isScrolled={isScrolled} />
+      <Header  />
 
       {/* --- MAIN CONTENT --- */}
       {/* Added relative z-10 to bring content above background */}

@@ -33,7 +33,7 @@ export default function AboutPage() {
   return (
     <>
       {/* --- HEADER --- */}
-      <Header isScrolled={isScrolled} />
+      <Header  />
 
       {/* --- MAIN CONTENT --- */}
       <main>
