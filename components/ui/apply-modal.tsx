@@ -74,7 +74,6 @@ export default function ApplyModal({ isOpen, onClose, onSuccess }: ApplyModalPro
           mobile: `${selectedCountry.code} ${formData.mobile}`,
         }
 
-        // Using your verified credentials
         await emailjs.send(
           'service_c4bc3js',
           'template_c0xssaj',
@@ -83,7 +82,7 @@ export default function ApplyModal({ isOpen, onClose, onSuccess }: ApplyModalPro
         )
 
         setShowSuccess(true)
-        if (onSuccess) onSuccess(); // Unlocks the curriculum on parent page
+        if (onSuccess) onSuccess()
       } catch (error) {
         console.error("Failed to send email:", error)
         alert("Submission failed. Please try again.")

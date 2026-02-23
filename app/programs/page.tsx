@@ -134,9 +134,11 @@ export default function AudiencePage() {
                     </li>
                   ))}
                 </ul>
-                <Button asChild className="w-full bg-[#0f172a] hover:bg-slate-800 text-white py-6 text-sm font-bold rounded-xl shadow-lg mt-auto">
-                    <Link href="/programs/open">View Open Programs</Link>
-                </Button>
+                <Link href="/programs/open" className="w-full mt-auto">
+  <Button className="w-full bg-[#0f172a] hover:bg-slate-800 text-white py-6 text-sm font-bold rounded-xl shadow-lg">
+    View Open Programs
+  </Button>
+</Link>
               </div>
 
             </div> {/* Closing Grid */}
