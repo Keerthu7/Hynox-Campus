@@ -25,6 +25,7 @@ export default function Header() {
   const getPath = (item: string) => {
     if (item === "Home") return "/";
     if (item === "Programs") return "/programs";
+    if (item === "Internship") return "https://campus-internship.vercel.app/";
     return `/${item.toLowerCase()}`;
   };
 
@@ -51,17 +52,15 @@ export default function Header() {
               />
             </div>
             
-            {/* Hynox Campus Text ah thirumba add panniyachu */}
-               <div className="flex flex-col justify-center">
-  {/* text-base ah text-sm nu maathiyachu */}
-  <span className="font-black text-sm text-black leading-none tracking-tighter uppercase">
-    Hynox
-  </span> 
-  {/* text-[8px] ah text-[7px] nu adjust pannirukom */}
-  <span className="text-[7px] font-bold uppercase tracking-[0.35em] text-[#00C365] mt-0.5 pl-0.5">
-    Campus
-  </span>
-</div>
+            {/* Hynox Campus Text */}
+            <div className="flex flex-col justify-center">
+              <span className="font-black text-sm text-black leading-none tracking-tighter uppercase">
+                Hynox
+              </span> 
+              <span className="text-[7px] font-bold uppercase tracking-[0.35em] text-[#00C365] mt-0.5 pl-0.5">
+                Campus
+              </span>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
@@ -69,6 +68,7 @@ export default function Header() {
             <Link href="/" className="text-sm font-medium text-black hover:text-[#00C365] transition-colors">Home</Link>
             <Link href="/about" className="text-sm font-medium text-black hover:text-[#00C365] transition-colors">About</Link>
             <Link href="/programs" className="text-sm font-medium text-black hover:text-[#00C365] transition-colors">Programs</Link>
+            <Link href="https://campus-internship.vercel.app" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-black hover:text-[#00C365] transition-colors">Internship</Link>
             <Link href="/contact" className="text-sm font-medium text-black hover:text-[#00C365] transition-colors">Contact</Link>
           </nav>
 
@@ -86,10 +86,12 @@ export default function Header() {
         {mobileMenuOpen && (
           <div className="md:hidden mt-4 pb-6 border-t border-gray-200 bg-white/95 backdrop-blur-xl rounded-b-3xl absolute left-0 w-full px-6 shadow-2xl animate-in slide-in-from-top duration-300">
             <nav className="flex flex-col gap-4 py-6">
-              {["Home", "About", "Programs", "Contact"].map((item) => (
+              {["Home", "About", "Programs", "Internship", "Contact"].map((item) => (
                 <Link
                   key={item}
                   href={getPath(item)}
+                  target={item === "Internship" ? "_blank" : undefined}
+                  rel={item === "Internship" ? "noopener noreferrer" : undefined}
                   onClick={() => setMobileMenuOpen(false)}
                   className="text-lg font-bold text-black hover:text-[#00C365] transition-colors border-b border-gray-100 pb-2"
                 >
