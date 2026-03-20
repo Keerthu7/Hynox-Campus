@@ -35,10 +35,11 @@ export default function Header() {
 
   const navItems = [
     { name: "Home", href: "/" },
-    { name: "About", href: "#about" },
-    { name: "Journey", href: "#journey" },
-    { name: "Sessions", href: "#sessions" },
-    { name: "Why Us", href: "#whyus" },
+    { name: "About", href: "/about" },
+    { name: "Programs", href: "/programs" },
+    { name: "Internship", href: "https://campus-internship.vercel.app/" },
+    { name: "Workshop", href: "/workshop" },
+    { name: "Contact", href: "/contact" },
   ];
 
   // --- SMOOTH SCROLL LOGIC ---
@@ -127,7 +128,9 @@ export default function Header() {
                 key={item.name} 
                 href={item.href}
                 onClick={(e) => handleScrollClick(e, item.href)}
-                className="text-sm font-medium text-black hover:text-[#00C365] transition-colors"
+                target={item.name === "Internship" ? "_blank" : undefined}
+                rel={item.name === "Internship" ? "noopener noreferrer" : undefined}
+                className="text-sm font-medium text-black hover:text-[#00C365] transition-colors whitespace-nowrap"
               >
                 {item.name}
               </Link>
@@ -157,11 +160,16 @@ export default function Header() {
         {mobileMenuOpen && (
           <div className="lg:hidden bg-white/95 backdrop-blur-md border-t border-gray-200 px-4 py-6 absolute w-full left-0 animate-in slide-in-from-top duration-300 shadow-2xl rounded-b-3xl">
             <nav className="flex flex-col gap-4">
-              {navItems.map((item) => (
+               {navItems.map((item) => (
                 <Link 
                   key={item.name} 
                   href={item.href}
-                  onClick={(e) => handleScrollClick(e, item.href)}
+                  onClick={(e) => {
+                    handleScrollClick(e, item.href);
+                    if (!item.href.startsWith("#")) setMobileMenuOpen(false);
+                  }}
+                  target={item.name === "Internship" ? "_blank" : undefined}
+                  rel={item.name === "Internship" ? "noopener noreferrer" : undefined}
                   className="text-lg font-bold text-black hover:text-[#00C365] py-2 border-b border-gray-100"
                 >
                   {item.name}

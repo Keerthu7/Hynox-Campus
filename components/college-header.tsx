@@ -38,6 +38,7 @@ export default function CollegeHeader() {
     { name: "Streams", href: "#streams" },
     { name: "Training", href: "#training" },
     { name: "Internship", href: "#internship" },
+    { name: "Workshop", href: "/workshop" },
     { name: "Compare", href: "#compare" },
     { name: "Benefits", href: "#benefits" },
   ];

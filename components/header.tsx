@@ -26,6 +26,7 @@ export default function Header() {
     if (item === "Home") return "/";
     if (item === "Programs") return "/programs";
     if (item === "Internship") return "https://campus-internship.vercel.app/";
+    if (item === "Workshop") return "/workshop";
     return `/${item.toLowerCase()}`;
   };
 
@@ -69,6 +70,7 @@ export default function Header() {
             <Link href="/about" className="text-sm font-medium text-black hover:text-[#00C365] transition-colors">About</Link>
             <Link href="/programs" className="text-sm font-medium text-black hover:text-[#00C365] transition-colors">Programs</Link>
             <Link href="https://campus-internship.vercel.app" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-black hover:text-[#00C365] transition-colors">Internship</Link>
+            <Link href="/workshop" className="text-sm font-medium text-black hover:text-[#00C365] transition-colors">Workshop</Link>
             <Link href="/contact" className="text-sm font-medium text-black hover:text-[#00C365] transition-colors">Contact</Link>
           </nav>
 
@@ -86,7 +88,7 @@ export default function Header() {
         {mobileMenuOpen && (
           <div className="md:hidden mt-4 pb-6 border-t border-gray-200 bg-white/95 backdrop-blur-xl rounded-b-3xl absolute left-0 w-full px-6 shadow-2xl animate-in slide-in-from-top duration-300">
             <nav className="flex flex-col gap-4 py-6">
-              {["Home", "About", "Programs", "Internship", "Contact"].map((item) => (
+              {["Home", "About", "Programs", "Internship", "Workshop", "Contact"].map((item) => (
                 <Link
                   key={item}
                   href={getPath(item)}
