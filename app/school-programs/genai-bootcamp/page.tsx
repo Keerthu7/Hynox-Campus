@@ -91,7 +91,7 @@ const SCHOOL_BENEFITS = [
 ];
 
 const PROGRAM_DETAILS = [
-  ["Duration",        "2.5 Hours", "bg-[#00C365]/5"],
+  ["Duration",        "1 day", "bg-[#00C365]/5"],
   ["Grade",           "Grade 6 to 12", "bg-white"],
   ["Batch Size",      "25 to 60 Students", "bg-[#00C365]/5"],
   ["Infrastructure",  "Projector only", "bg-white"],

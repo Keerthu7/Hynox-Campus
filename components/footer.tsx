@@ -29,7 +29,7 @@ export default function Footer() {
             <ul className="space-y-4 text-sm">
               {[
                 { name: "About Us", path: "/about" },
-                { name: "Careers", path: "/careers" },
+                { name: "Programs", path: "/programs" },
                 { name: "Contact", path: "/contact" }
               ].map((item) => (
                 <li key={item.name}>
