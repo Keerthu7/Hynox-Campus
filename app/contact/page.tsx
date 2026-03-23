@@ -5,14 +5,11 @@ import { Mail, MapPin, Phone, ChevronDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-
-// 1. Import AOS for animations
-import AOS from 'aos'
-import 'aos/dist/aos.css'
-
-// Components
 import Header from "@/components/header"
 import Footer from "@/components/footer"
+import { contactSubmit } from "@/actions/contact-submit"
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 
 const countries = [
   { code: "IN", dial: "+91", name: "India" },
@@ -31,7 +28,6 @@ export default function ContactPage() {
   const [isScrolled, setIsScrolled] = useState(false)
 
   useEffect(() => {
-    // 2. Initialize AOS animations
     AOS.init({
       duration: 1000,
       once: true,
@@ -43,24 +39,35 @@ export default function ContactPage() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    const form = e.currentTarget
     setIsSubmitting(true)
-    await new Promise((resolve) => setTimeout(resolve, 1500))
-    setIsSubmitting(false)
-    alert("Message sent successfully!")
+
+    const formData = new FormData(form)
+    formData.append("dialCode", selectedCountry.dial)
+
+    try {
+      const result = await contactSubmit(formData)
+      if (result.success) {
+        alert("Message sent successfully!")
+        form.reset()
+        setAgreed(false)
+      } else {
+        alert("Failed to send message. Please try again later.")
+      }
+    } catch (error) {
+      console.error("Submission failed", error)
+      alert("An unexpected error occurred.")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
     <div className="flex flex-col min-h-screen font-sans bg-white relative overflow-x-hidden">
-      
-      {/* --- HEADER --- */}
       <Header />
-
-      {/* --- MAIN CONTENT AREA --- */}
-      <main className="flex-grow pt-32 pb-20 relative">
-        
-        {/* Subtle Light Grid Background */}
+      <main className="flex-grow pt-24 md:pt-32 pb-16 md:pb-20 relative">
         <div 
           className="absolute inset-0 z-0 pointer-events-none opacity-50"
           style={{
@@ -70,12 +77,9 @@ export default function ContactPage() {
         />
 
         <div className="container px-4 mx-auto max-w-6xl relative z-10">
-          
           <div className="grid gap-12 mb-20 lg:grid-cols-2 lg:gap-20">
-            
-            {/* LEFT: Quote Card with Slide-In Animation */}
             <div 
-              className="relative flex flex-col justify-center overflow-hidden bg-[#0B1C2E] rounded-[2rem] p-10 md:p-14 min-h-[500px] shadow-2xl transition-transform hover:scale-[1.01]"
+              className="relative flex flex-col justify-center overflow-hidden bg-[#0B1C2E] rounded-[2rem] p-8 md:p-14 min-h-[300px] md:min-h-[500px] shadow-2xl transition-transform hover:scale-[1.01]"
               data-aos="fade-right"
             >
               <h2 className="relative z-10 text-4xl font-medium leading-tight text-white md:text-5xl font-poppins">
@@ -83,7 +87,6 @@ export default function ContactPage() {
                 learning, you’re not <br />
                 <span className="text-[#00C365]">growing.</span>”
               </h2>
-              
               <div className="absolute bottom-10 right-10 z-0">
                 <div className="relative w-24 h-24 transition-transform duration-500 group-hover:scale-110">
                   <div className="absolute top-0 left-0 w-20 h-20 border-4 rounded-sm border-white/20 transform -translate-x-4 -translate-y-4"></div>
@@ -92,15 +95,13 @@ export default function ContactPage() {
               </div>
             </div>
 
-            {/* RIGHT: The Form with Staggered Animation */}
             <div className="flex flex-col justify-center" data-aos="fade-left">
               <form onSubmit={handleSubmit} className="space-y-6">
-                
-                {/* Email Field */}
                 <div className="space-y-2" data-aos="fade-up" data-aos-delay="100">
                   <label htmlFor="email" className="text-sm font-bold text-slate-700">Email address</label>
                   <Input 
                     id="email" 
+                    name="email"
                     type="email"
                     placeholder="yourname@email.com" 
                     className="bg-white border-slate-200 h-12 rounded-xl text-slate-900 focus-visible:ring-[#00C365] shadow-sm"
@@ -108,44 +109,39 @@ export default function ContactPage() {
                   />
                 </div>
 
-                {/* Phone Number Field */}
                 <div className="space-y-2" data-aos="fade-up" data-aos-delay="200">
                   <label htmlFor="phone" className="text-sm font-bold text-slate-700">Phone number</label>
                   <div className="flex gap-3">
                     <div className="relative shrink-0">
-                        <div className="flex items-center justify-between w-[115px] h-12 px-3 bg-white border border-slate-200 rounded-xl cursor-pointer shadow-sm">
-                            <div className="flex items-center gap-2">
-                                <img 
-                                    src={`https://flagcdn.com/${selectedCountry.code.toLowerCase()}.svg`} 
-                                    alt={selectedCountry.name}
-                                    className="w-6 h-auto rounded-sm shadow-sm object-cover"
-                                />
-                                <span className="text-sm font-medium text-slate-700">{selectedCountry.dial}</span>
-                            </div>
-                            <ChevronDown size={14} className="text-slate-400" />
+                      <div className="flex items-center justify-between w-[115px] h-12 px-3 bg-white border border-slate-200 rounded-xl cursor-pointer shadow-sm">
+                        <div className="flex items-center gap-2">
+                          <img 
+                            src={`https://flagcdn.com/${selectedCountry.code.toLowerCase()}.svg`} 
+                            alt={selectedCountry.name}
+                            className="w-6 h-auto rounded-sm shadow-sm object-cover"
+                          />
+                          <span className="text-sm font-medium text-slate-700">{selectedCountry.dial}</span>
                         </div>
-                        <select 
-                            className="absolute inset-0 w-full h-full opacity-0 cursor-pointer font-sans text-gray-900"
-                            value={selectedCountry.code}
-                            onChange={(e) => {
-                                const country = countries.find(c => c.code === e.target.value)
-                                if (country) setSelectedCountry(country)
-                            }}
-                        >
-                            {countries.map((country) => (
-                                <option 
-                                  key={country.code} 
-                                  value={country.code} 
-                                  className="text-gray-900 bg-white"
-                                >
-                                    {country.name} ({country.dial})
-                                </option>
-                            ))}
-                        </select>
+                        <ChevronDown size={14} className="text-slate-400" />
+                      </div>
+                      <select 
+                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer font-sans text-gray-900"
+                        value={selectedCountry.code}
+                        onChange={(e) => {
+                          const country = countries.find(c => c.code === e.target.value)
+                          if (country) setSelectedCountry(country)
+                        }}
+                      >
+                        {countries.map((country) => (
+                          <option key={country.code} value={country.code} className="text-gray-900 bg-white">
+                            {country.name} ({country.dial})
+                          </option>
+                        ))}
+                      </select>
                     </div>
-
                     <Input 
                       id="phone" 
+                      name="phone"
                       type="tel"
                       placeholder="98765 43210"
                       className="w-full bg-white border-slate-200 h-12 rounded-xl text-slate-900 focus-visible:ring-[#00C365] shadow-sm"
@@ -154,30 +150,28 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                {/* Message Field */}
                 <div className="space-y-2" data-aos="fade-up" data-aos-delay="300">
                   <label htmlFor="message" className="text-sm font-bold text-slate-700">Message</label>
                   <Textarea 
                     id="message" 
+                    name="message"
                     placeholder="Have a question about a specific course?..." 
                     className="bg-white border-slate-200 min-h-[120px] rounded-xl text-slate-900 focus-visible:ring-[#00C365] resize-none p-4 shadow-sm"
                     required 
                   />
                 </div>
 
-                {/* Checkbox */}
                 <div className="flex items-start gap-3 cursor-pointer group" onClick={() => setAgreed(!agreed)} data-aos="fade-up" data-aos-delay="400">
                   <div className="pt-1">
-                      <div className={`w-4 h-4 rounded border flex items-center justify-center transition-colors ${agreed ? "bg-[#00C365] border-[#00C365]" : "border-slate-300 bg-white"}`}>
-                          {agreed && <div className="w-2 h-2 bg-white rounded-sm" />}
-                      </div>
-                   </div>
+                    <div className={`w-4 h-4 rounded border flex items-center justify-center transition-colors ${agreed ? "bg-[#00C365] border-[#00C365]" : "border-slate-300 bg-white"}`}>
+                      {agreed && <div className="w-2 h-2 bg-white rounded-sm" />}
+                    </div>
+                  </div>
                   <label className="text-xs leading-relaxed text-slate-500 cursor-pointer select-none group-hover:text-slate-700">
                     I authorize Hynox Campus to contact me with updates via Email, SMS, WhatsApp, and Call.
                   </label>
                 </div>
 
-                {/* Send Button */}
                 <div data-aos="fade-up" data-aos-delay="500">
                   <Button 
                     type="submit" 
@@ -191,45 +185,28 @@ export default function ContactPage() {
             </div>
           </div>
 
-          {/* Bottom Info Cards with Sequence Animation */}
-          <div className="grid gap-6 md:grid-cols-3">
-            <div 
-              className="flex items-center gap-4 p-6 bg-white border border-slate-100 shadow-xl rounded-2xl"
-              data-aos="fade-up"
-              data-aos-delay="600"
-            >
-              <div className="flex items-center justify-center w-12 h-12 text-slate-900 border-2 border-slate-900 rounded-xl">
-                <Phone size={22} />
+          <div className="grid gap-4 md:gap-6 md:grid-cols-3">
+            <div className="flex items-center gap-4 p-5 md:p-6 bg-white border border-slate-100 shadow-lg rounded-2xl" data-aos="fade-up" data-aos-delay="600">
+              <div className="flex items-center justify-center shrink-0 w-10 h-10 md:w-12 md:h-12 text-slate-900 border-2 border-slate-900 rounded-xl">
+                <Phone size={20} />
               </div>
-              <span className="font-bold text-slate-900">(+91) 9345558938</span>
+              <span className="font-bold text-slate-900 text-sm md:text-base">(+91) 9345558938</span>
             </div>
-
-            <div 
-              className="flex items-center gap-4 p-6 bg-white border border-slate-100 shadow-xl rounded-2xl"
-              data-aos="fade-up"
-              data-aos-delay="700"
-            >
-              <div className="flex items-center justify-center w-12 h-12 text-slate-900 border-2 border-slate-900 rounded-xl">
-                <Mail size={22} />
+            <div className="flex items-center gap-4 p-5 md:p-6 bg-white border border-slate-100 shadow-lg rounded-2xl" data-aos="fade-up" data-aos-delay="700">
+              <div className="flex items-center justify-center shrink-0 w-10 h-10 md:w-12 md:h-12 text-slate-900 border-2 border-slate-900 rounded-xl">
+                <Mail size={20} />
               </div>
-              <span className="font-bold text-slate-900">hello.hynox@gmail.com</span>
+              <span className="font-bold text-slate-900 text-sm md:text-base break-all">hello.hynoxcampus@gmail.com</span>
             </div>
-
-            <div 
-              className="flex items-center gap-4 p-6 bg-white border border-slate-100 shadow-xl rounded-2xl"
-              data-aos="fade-up"
-              data-aos-delay="800"
-            >
-              <div className="flex items-center justify-center w-12 h-12 text-slate-900 border-2 border-slate-900 rounded-xl">
-                <MapPin size={22} />
+            <div className="flex items-center gap-4 p-5 md:p-6 bg-white border border-slate-100 shadow-lg rounded-2xl" data-aos="fade-up" data-aos-delay="800">
+              <div className="flex items-center justify-center shrink-0 w-10 h-10 md:w-12 md:h-12 text-slate-900 border-2 border-slate-900 rounded-xl">
+                <MapPin size={20} />
               </div>
-              <span className="font-bold text-slate-900">Coimbatore</span>
+              <span className="font-bold text-slate-900 text-sm md:text-base">Coimbatore</span>
             </div>
           </div>
         </div>
       </main>
-
-      {/* --- FOOTER --- */}
       <Footer />
     </div>
   )

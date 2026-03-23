@@ -53,7 +53,7 @@ export default function Footer() {
                 { 
                   icon: Mail, 
                   label: "Email", 
-                  href: "https://mail.google.com/mail/?view=cm&fs=1&to=hello.hynox@gmail.com" 
+                  href: "https://mail.google.com/mail/?view=cm&fs=1&to=hello.hynoxcampus@gmail.com" 
                 },
                 { 
                   icon: Linkedin, 
@@ -82,13 +82,13 @@ export default function Footer() {
         </div>
 
         {/* Bottom Section */}
-        <div className="border-t border-border/50 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
+        <div className="border-t border-border/50 pt-8 flex flex-col md:flex-row justify-between items-center gap-6 md:gap-4 text-sm text-muted-foreground text-center md:text-left">
           <p>© {currentYear} Hynox Campus. All rights reserved.</p>
-          <div className="flex items-center gap-8">
-            <Link href="/privacy" className="hover:text-[#00C365] transition-colors font-medium">
+          <div className="flex flex-wrap items-center justify-center gap-6 md:gap-8 font-medium">
+            <Link href="/privacy" className="hover:text-[#00C365] transition-colors">
               Privacy Policy
             </Link>
-            <Link href="/terms" className="hover:text-[#00C365] transition-colors font-medium">
+            <Link href="/terms" className="hover:text-[#00C365] transition-colors">
               Terms of Service
             </Link>
           </div>

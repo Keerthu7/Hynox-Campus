@@ -8,7 +8,7 @@ export default function CollegeReadinessCta() {
   const [ref, isVisible] = useScrollAnimation()
 
   // Your official Calendly booking link
-  const meetingLink = "https://calendly.com/hello-hynox/30min"
+  const meetingLink = "https://calendly.com/hello-hynoxcampus/30min"
 
   return (
     <section 

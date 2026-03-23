@@ -56,7 +56,7 @@ export default function CareersPage() {
   ]
 
   // Replace this with your actual HR/Careers email address
-  const contactEmail = "hello@hynox.com" 
+  const contactEmail = "hello.hynoxcampus@gmail.com" 
 
   return (
     <>

@@ -37,42 +37,43 @@ export default function TermsPage() {
 
           <div className="space-y-10 text-lg leading-relaxed text-gray-700">
             <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">1. Acceptance of Terms</h2>
-              <p>By accessing and using Hynox Campus, you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by these terms, please do not use our service.</p>
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">1. Enrollment & Access</h2>
+              <p className="mb-4">By enrolling in any Hynox Campus workshop or program, you agree to provide accurate information and abide by the learning community guidelines. Access to workshop materials and sessions is restricted to the registered user and cannot be shared.</p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">2. User Accounts</h2>
-              <p className="mb-4">When you create an account with us, you must provide us with information that is accurate, complete, and current at all times. Failure to do so constitutes a breach of the Terms, which may result in immediate termination of your account on our Service.</p>
-              <p>You are responsible for safeguarding the password that you use to access the Service and for any activities or actions under your password.</p>
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">2. Payments & Refund Policy</h2>
+              <p className="mb-4">All workshops are paid programs. We offer a transparent refund policy based on your participation:</p>
+              <div className="bg-slate-50 border-l-4 border-[#00C365] p-6 rounded-r-xl space-y-3">
+                <p className="font-bold text-[#0F172A]">Workshop Refund Rules:</p>
+                <ul className="list-disc pl-6 space-y-2 text-gray-600">
+                  <li><strong>Zero Participation:</strong> If you do not attend any workshop sessions within your enrolled program, you are eligible for a <strong>50% refund</strong> of the program fee.</li>
+                  <li><strong>Active Participation:</strong> If you attend even a <strong>single workshop session</strong>, you will <strong>not be eligible</strong> for any refund.</li>
+                </ul>
+                <p className="text-sm text-gray-500 mt-2 italic">Refund requests must be submitted via email within 7 days of the program start date.</p>
+              </div>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">3. Platform Usage & Conduct</h2>
-              <p className="mb-4">Our platform is intended for educational purposes. You agree not to:</p>
-              <ul className="list-disc pl-6 space-y-2 text-gray-600">
-                <li>Use the service for any unlawful purpose.</li>
-                <li>Harass, abuse, or harm other users or instructors.</li>
-                <li>Attempt to bypass any security measures of the platform.</li>
-                <li>Copy, distribute, or disclose any part of the service in any medium.</li>
-              </ul>
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">3. Certification & Attendance</h2>
+              <p className="mb-4">Certificates are awarded based on successful completion of the required workshop hours and assessments. Hynox Campus reserved the right to withhold certification if the user fails to meet the minimum attendance or project submission criteria.</p>
             </section>
 
             <section>
               <h2 className="text-2xl font-bold text-gray-900 mb-4">4. Intellectual Property</h2>
-              <p>The Service and its original content (excluding Content provided by users), features, curriculum, and functionality are and will remain the exclusive property of Hynox Campus and its licensors. The Service is protected by copyright, trademark, and other laws.</p>
+              <p>The curriculum, teaching methods, digital resources, and software provided during the program are the exclusive intellectual property of Hynox Campus. Redistribution, recording, or commercial use of our training materials is strictly prohibited.</p>
             </section>
 
             <section>
               <h2 className="text-2xl font-bold text-gray-900 mb-4">5. Limitation of Liability</h2>
-              <p>In no event shall Hynox Campus, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from your access to or use of or inability to access or use the Service.</p>
+              <p>Hynox Campus aims to provide high-quality industry skills but does not guarantee specific employment outcomes. We are not liable for any indirect or consequential issues arising from the use of our educational tools or platform.</p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">6. Changes to Terms</h2>
-              <p>We reserve the right, at our sole discretion, to modify or replace these Terms at any time. By continuing to access or use our Service after those revisions become effective, you agree to be bound by the revised terms.</p>
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">6. Contact for Queries</h2>
+              <p>If you have any questions regarding these terms or your refund eligibility, please reach out to us at:</p>
+              <p className="mt-4 font-semibold text-[#00C365]">hello.hynoxcampus@gmail.com</p>
             </section>
-
           </div>
 
         </div>

@@ -96,7 +96,7 @@ export default function Header() {
       >
         <div className="container mx-auto px-4 flex items-center justify-between">
           
-         <Link href="/" className="flex items-center gap-3 group ml-8 md:ml-16">
+         <Link href="/" className="flex items-center gap-3 group md:ml-16">
             <div className="flex-shrink-0 flex items-center">
               <Image 
                 src="/logo.png"  

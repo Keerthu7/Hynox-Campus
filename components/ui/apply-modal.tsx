@@ -3,7 +3,7 @@
 import { X, ChevronDown, CheckCircle2, Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useState, useRef, useEffect } from "react"
-import emailjs from '@emailjs/browser'
+import { applySubmit } from "@/actions/apply-submit"
 
 const COUNTRIES = [
   { code: "+91", iso: "in", name: "India" },
@@ -68,21 +68,18 @@ export default function ApplyModal({ isOpen, onClose, onSuccess }: ApplyModalPro
       setIsSubmitting(true)
       
       try {
-        const templateParams = {
-          name: formData.name,
-          email: formData.email,
-          mobile: `${selectedCountry.code} ${formData.mobile}`,
-        }
-
-        await emailjs.send(
-          'service_c4bc3js',
-          'template_c0xssaj',
-          templateParams,
-          'oZz5NzhfynPb643iX'
+        const result = await applySubmit(
+          formData.name,
+          formData.email,
+          `${selectedCountry.code} ${formData.mobile}`
         )
-
-        setShowSuccess(true)
-        if (onSuccess) onSuccess()
+        
+        if (result.success) {
+          setShowSuccess(true)
+          if (onSuccess) onSuccess()
+        } else {
+          alert("Submission failed. " + (result.message || "Please try again."))
+        }
       } catch (error) {
         console.error("Failed to send email:", error)
         alert("Submission failed. Please try again.")

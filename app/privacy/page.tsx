@@ -37,39 +37,56 @@ export default function PrivacyPolicyPage() {
 
           <div className="space-y-10 text-lg leading-relaxed text-gray-700">
             <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">1. Information We Collect</h2>
-              <p className="mb-4">At Hynox Campus, we collect information that you provide directly to us, such as when you create an account, update your profile, participate in our programs, or communicate with us.</p>
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">1. Introduction</h2>
+              <p className="mb-4">Welcome to Hynox Campus. We value your privacy and are committed to protecting your personal data. This Privacy Policy explains how we collect, use, and safeguard your information when you visit our website, enroll in our workshops, or use our services.</p>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">2. Information We Collect</h2>
+              <p className="mb-4">We collect information that helps us provide a better learning experience for you. This includes:</p>
               <ul className="list-disc pl-6 space-y-2 text-gray-600">
-                <li><strong>Personal Data:</strong> Name, email address, phone number, and educational background.</li>
-                <li><strong>Usage Data:</strong> Information about how you use our platform, courses viewed, and interaction metrics.</li>
+                <li><strong>Identity Data:</strong> Full name, age, and educational institution (School/College).</li>
+                <li><strong>Contact Data:</strong> Email address and phone number for session links and updates.</li>
+                <li><strong>Academic Interest:</strong> Your preferred technology domains (e.g., Coding, AI, Robotics).</li>
+                <li><strong>Transaction Data:</strong> Details about payments made for workshops and program enrollments.</li>
               </ul>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">2. How We Use Your Information</h2>
-              <p className="mb-4">We use the information we collect to:</p>
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">3. How We Use Your Data</h2>
+              <p className="mb-4">Your information is used to:</p>
               <ul className="list-disc pl-6 space-y-2 text-gray-600">
-                <li>Provide, maintain, and improve our educational services.</li>
-                <li>Process transactions and send related information.</li>
-                <li>Send technical notices, updates, and support messages.</li>
-                <li>Communicate with you about new programs, events, and offers.</li>
+                <li>Register you for selected workshops and training tracks.</li>
+                <li>Issue digital certificates and performance reports.</li>
+                <li>Facilitate internship placements and industry connections.</li>
+                <li>Send important program updates via Email, WhatsApp, or SMS.</li>
               </ul>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">3. Data Security</h2>
-              <p>We implement appropriate technical and organizational security measures designed to protect the security of any personal information we process. However, please also remember that we cannot guarantee that the internet itself is 100% secure. Although we will do our best to protect your personal information, transmission of personal information to and from our platform is at your own risk.</p>
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">4. Third-Party Services</h2>
+              <p className="mb-4">To provide a seamless experience, we use trusted partners:</p>
+              <ul className="list-disc pl-6 space-y-2 text-gray-600">
+                <li><strong>Calendly:</strong> For scheduling discovery sessions and meetings.</li>
+                <li><strong>WhatsApp/Email:</strong> For direct communication and resource sharing.</li>
+                <li><strong>Payment Gateways:</strong> We do not store your credit card details; all transactions are processed via secure third-party providers.</li>
+              </ul>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">4. Sharing Your Information</h2>
-              <p>We do not sell or rent your personal data to third parties. We may share your information with trusted third-party service providers who assist us in operating our website, conducting our business, or serving our users, so long as those parties agree to keep this information confidential.</p>
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">5. Data Retention & Security</h2>
+              <p>We retain your data as long as necessary to provide our educational services. We implement industry-standard security measures to prevent unauthorized access, but please note that no method of transmission over the internet is 100% secure.</p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">5. Contact Us</h2>
-              <p>If you have any questions or comments about this Privacy Policy, please contact us at:</p>
-              <p className="mt-4 font-semibold text-[#00C365]">hello@hynox.com</p>
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">6. Your Rights</h2>
+              <p>You have the right to request access to your personal data, request corrections, or ask for the deletion of your account. To exercise these rights, please contact our support team.</p>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">7. Contact Information</h2>
+              <p>For any privacy-related inquiries, please reach out to us at:</p>
+              <p className="mt-4 font-semibold text-[#00C365]">hello.hynoxcampus@gmail.com</p>
             </section>
           </div>
 
