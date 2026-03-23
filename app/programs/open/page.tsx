@@ -66,7 +66,7 @@ export default function OpenProgramsPage() {
   )
 
   return (
-    <div className="flex flex-col min-h-screen font-poppins bg-white relative">
+    <div className="flex flex-col min-h-screen font-poppins bg-white relative overflow-y-auto">
       
       {/* --- HEADER --- */}
       <div className="relative z-20 bg-white">
@@ -136,8 +136,8 @@ export default function OpenProgramsPage() {
       </main>
 
       {/* --- FLOATING FILTER BAR --- */}
-      <div className="fixed bottom-10 left-1/2 transform -translate-x-1/2 z-40 w-[90%] md:w-auto">
-        <div className="bg-[#222938] p-1.5 rounded-full shadow-2xl flex items-center gap-1 border border-slate-700/50 overflow-x-auto hide-scrollbar">
+      <div className="fixed bottom-10 left-1/2 transform -translate-x-1/2 z-40 w-[90%] md:w-auto pointer-events-none">
+        <div className="bg-[#222938] p-1.5 rounded-full shadow-2xl flex items-center gap-1 border border-slate-700/50 overflow-x-auto hide-scrollbar pointer-events-auto">
           {categories.map((category) => (
             <button
               key={category}
@@ -160,8 +160,8 @@ export default function OpenProgramsPage() {
 
       {/* --- POPUP MODAL FOR PROGRAM DETAILS --- */}
       {selectedProgram && (
-        <div className="fixed inset-0 z-[90] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-          <div className="bg-white rounded-[24px] w-full max-w-[900px] p-8 relative shadow-2xl animate-in fade-in zoom-in duration-200">
+        <div className="fixed inset-0 z-[90] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm overflow-y-auto">
+          <div className="bg-white rounded-[24px] w-full max-w-[900px] p-6 md:p-8 relative shadow-2xl animate-in fade-in zoom-in duration-200 my-auto lg:my-8 max-h-fit">
             
             <div className="flex justify-between items-start mb-2">
               <div>

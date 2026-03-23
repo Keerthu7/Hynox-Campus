@@ -190,7 +190,7 @@ export default function ContactPage() {
               <div className="flex items-center justify-center shrink-0 w-10 h-10 md:w-12 md:h-12 text-slate-900 border-2 border-slate-900 rounded-xl">
                 <Phone size={20} />
               </div>
-              <span className="font-bold text-slate-900 text-sm md:text-base">(+91) 9345558938</span>
+              <span className="font-bold text-slate-900 text-sm md:text-base">(+91) 97919 97600</span>
             </div>
             <div className="flex items-center gap-4 p-5 md:p-6 bg-white border border-slate-100 shadow-lg rounded-2xl" data-aos="fade-up" data-aos-delay="700">
               <div className="flex items-center justify-center shrink-0 w-10 h-10 md:w-12 md:h-12 text-slate-900 border-2 border-slate-900 rounded-xl">

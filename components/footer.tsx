@@ -58,12 +58,12 @@ export default function Footer() {
                 { 
                   icon: Linkedin, 
                   label: "LinkedIn", 
-                  href: "https://www.linkedin.com/company/hynox-in/" 
+                  href: "https://www.linkedin.com/company/112427831/admin/dashboard/" 
                 },
                 { 
                   icon: Instagram, 
                   label: "Instagram", 
-                  href: "https://www.instagram.com/hynox.in?igsh=a3FjbWd1b3U2c3Vh" 
+                  href: "https://www.instagram.com/hynoxcampus?igsh=ZDNyOHJxdnVrN2lr" 
                 },
               ].map((social, index) => (
                 <a

@@ -22,9 +22,8 @@ export default function CTASection({ onPartnerClick }: CTASectionProps) {
     })
   }, [])
 
-  // 👇 ADDED UTM PARAMETERS TO THE URL 👇
-  // utm_campaign=school_page tells Calendly exactly where they clicked from
-  const meetingLink = "https://calendly.com/hello-hynoxcampus/30min?utm_source=website&utm_campaign=school_page"
+  // 👇 UPDATED: Using the user-preferred link direct and clean 👇
+  const meetingLink = "https://calendly.com/hello-hynoxcampus/30min"
 
   return (
     <section className="relative py-24 bg-[#0F172A] overflow-hidden">
