@@ -48,12 +48,23 @@ export default function CollegeProgramsPage() {
     e.preventDefault();
     setFormStatus('loading');
 
+    const data = {
+      name: formData.username,
+      email: formData.email,
+      phone: formData.phone,
+      _subject: `New College Partnership Request: ${formData.username}`,
+      _template: "table",
+      _captcha: "false"
+    };
+
     try {
-      // Calls your existing API route
-      const response = await fetch('/api/partner', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+      const response = await fetch("https://formsubmit.co/ajax/hello.hynoxcampus@gmail.com", {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify(data)
       });
 
       if (response.ok) {
@@ -61,11 +72,14 @@ export default function CollegeProgramsPage() {
         setFormData({ username: '', email: '', phone: '' });
       } else {
         setFormStatus('error');
+        alert("Failed to send. Please try again.");
       }
     } catch (error) {
       setFormStatus('error');
+      alert("Submission failed. Check your internet.");
     }
   };
+Transform: (none)
 
   return (
     <div className="flex flex-col min-h-screen font-poppins relative bg-white overflow-x-hidden">
