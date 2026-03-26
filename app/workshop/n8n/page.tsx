@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button"
 import { CheckCircle, Zap, Shield, Rocket, Download, ArrowLeft, PlayCircle, Layers, Database, Workflow, Cpu, ChevronRight, Loader2, ChevronDown, Award, Globe, MessageSquare } from "lucide-react"
 import AOS from "aos"
 import "aos/dist/aos.css"
-import { workshopApply } from "@/actions/workshop-apply"
 import Footer from "@/components/footer"
 
 // ── DATA ─────────────────────────────────────────────────────────────────
