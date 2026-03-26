@@ -1,6 +1,8 @@
 // app/api/apply/route.ts
 import { NextResponse } from 'next/server';
-import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: Request) {
   try {
@@ -10,19 +12,9 @@ export async function POST(req: Request) {
       return NextResponse.json({ message: 'Missing required fields' }, { status: 400 });
     }
 
-    const transporter = nodemailer.createTransport({
-      host: 'smtp.gmail.com',
-      port: 465,
-      secure: true,
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-    });
-
-    await transporter.sendMail({
-      from: `Hynox Campus <${process.env.EMAIL_USER}>`,
-      to: 'hello.hynoxcampus@gmail.com',
+    await resend.emails.send({
+      from: 'Hynox Campus <onboarding@resend.dev>',
+      to: ['hello.hynoxcampus@gmail.com'],
       subject: `New Sign-In / Discovery Session: ${name}`,
       html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: 20px auto; padding: 30px; border: 1px solid #e2e8f0; border-radius: 12px; background-color: #ffffff;">
@@ -42,7 +34,7 @@ export async function POST(req: Request) {
             </tr>
           </table>
           <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e2e8f0; font-size: 12px; color: #94a3b8; text-align: center;">
-            Submitted via Hynox Campus dynamic modal (Discovery Session / Content Unlock).
+            Submitted via Hynox Campus modal.
           </div>
         </div>
       `,

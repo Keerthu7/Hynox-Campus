@@ -53,7 +53,7 @@ export default function ApplyModal({ isOpen, onClose, onSuccess }: ApplyModalPro
     }
   }
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     const newErrors = { name: "", email: "", mobile: "" }
     let isValid = true
 
@@ -64,32 +64,13 @@ export default function ApplyModal({ isOpen, onClose, onSuccess }: ApplyModalPro
     setErrors(newErrors)
 
     if (isValid) {
-      setIsSubmitting(true)
-      try {
-        const response = await fetch('/api/apply', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            name: formData.name,
-            email: formData.email,
-            mobile: `${selectedCountry.code} ${formData.mobile}`,
-          }),
-        })
-
-        if (response.ok) {
-          setShowSuccess(true)
-          if (onSuccess) onSuccess()
-        } else {
-          const data = await response.json()
-          console.error('Server error:', data)
-          alert("Submission failed. Please try again.")
-        }
-      } catch (error) {
-        console.error("Fetch error:", error)
-        alert("Submission failed. Please try again.")
-      } finally {
-        setIsSubmitting(false)
-      }
+      const subject = encodeURIComponent(`New Sign-In / Discovery Session: ${formData.name}`)
+      const body = encodeURIComponent(
+        `Full Name: ${formData.name}\nEmail: ${formData.email}\nMobile: ${selectedCountry.code} ${formData.mobile}`
+      )
+      window.location.href = `mailto:hello.hynoxcampus@gmail.com?subject=${subject}&body=${body}`
+      setShowSuccess(true)
+      if (onSuccess) onSuccess()
     }
   }
 

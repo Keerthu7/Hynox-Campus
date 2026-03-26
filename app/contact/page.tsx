@@ -7,7 +7,6 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
-import { contactSubmit } from "@/actions/contact-submit"
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 
@@ -28,40 +27,30 @@ export default function ContactPage() {
   const [isScrolled, setIsScrolled] = useState(false)
 
   useEffect(() => {
-    AOS.init({
-      duration: 1000,
-      once: true,
-      easing: 'ease-out-cubic',
-    })
-
+    AOS.init({ duration: 1000, once: true, easing: 'ease-out-cubic' })
     const handleScroll = () => setIsScrolled(window.scrollY > 20)
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const form = e.currentTarget
-    setIsSubmitting(true)
-
     const formData = new FormData(form)
-    formData.append("dialCode", selectedCountry.dial)
 
-    try {
-      const result = await contactSubmit(formData)
-      if (result.success) {
-        alert("Message sent successfully!")
-        form.reset()
-        setAgreed(false)
-      } else {
-        alert("Failed to send message. Please try again later.")
-      }
-    } catch (error) {
-      console.error("Submission failed", error)
-      alert("An unexpected error occurred.")
-    } finally {
-      setIsSubmitting(false)
-    }
+    const email = formData.get("email") as string
+    const phone = formData.get("phone") as string
+    const message = formData.get("message") as string
+
+    const subject = encodeURIComponent(`New Contact Inquiry from ${email}`)
+    const body = encodeURIComponent(
+      `Email: ${email}\nPhone: ${selectedCountry.dial} ${phone}\n\nMessage:\n${message}`
+    )
+
+    window.location.href = `mailto:hello.hynoxcampus@gmail.com?subject=${subject}&body=${body}`
+
+    form.reset()
+    setAgreed(false)
   }
 
   return (

@@ -107,7 +107,7 @@ const N8NWorkshop = () => {
     }
   }
 
-  const handlePaymentComplete = async () => {
+  const handlePaymentComplete = () => {
     let hasError = false
     
     if (!utrNumber || utrNumber.length < 10) {
@@ -125,33 +125,28 @@ const N8NWorkshop = () => {
     setUtrError(false)
     setScreenshotError(false)
     setPaymentStatus('processing')
-    
-    // Actually call the server action
+
     if (pendingFormData) {
-      // We append the package info, UTR, and Screenshot to the form data
-      pendingFormData.append('package', selectedOption === 'standard' ? 'Standard (₹199)' : 'Premium (₹298)')
-      pendingFormData.append('utr_number', utrNumber)
-      pendingFormData.append('screenshot', screenshotFile as File)
-      
-      try {
-        const result = await workshopApply(pendingFormData)
-        
-        if (result.success) {
-          setPaymentStatus('success')
-          // Final transition to success state
-          setTimeout(() => {
-            setShowPayment(false)
-            setFormStatus('success')
-          }, 1500)
-        } else {
-          setPaymentStatus('idle')
-          alert("Something went wrong. Please try again.")
-        }
-      } catch (error) {
-        console.error("Submission failed", error)
-        setPaymentStatus('idle')
-        alert("Submission failed. Please check your connection.")
-      }
+      const fullname = pendingFormData.get('fullname') as string
+      const email = pendingFormData.get('email') as string
+      const phone = pendingFormData.get('phone') as string
+      const college = pendingFormData.get('college') as string
+      const year = pendingFormData.get('year') as string
+      const domain = pendingFormData.get('domain') as string
+      const experience = pendingFormData.get('experience') as string
+      const pkg = selectedOption === 'standard' ? 'Standard (₹199)' : 'Premium (₹298)'
+
+      const subject = encodeURIComponent(`New Workshop Application: ${domain} - ${fullname}`)
+      const body = encodeURIComponent(
+        `Full Name: ${fullname}\nEmail: ${email}\nPhone: ${phone}\nCollege: ${college}\nYear: ${year}\nDomain: ${domain}\nExperience: ${experience}\nPackage: ${pkg}\nUTR / Transaction ID: ${utrNumber}\n\nNote: Payment screenshot sent separately by the applicant.`
+      )
+
+      window.open(`mailto:hello.hynoxcampus@gmail.com?subject=${subject}&body=${body}`, '_blank')
+
+      setTimeout(() => {
+        setShowPayment(false)
+        setFormStatus('success')
+      }, 500)
     }
   }
 
