@@ -22,8 +22,11 @@ export default function CTASection({ onPartnerClick }: CTASectionProps) {
     })
   }, [])
 
-  // 👇 UPDATED: Using the user-preferred link direct and clean 👇
-  const meetingLink = "https://calendly.com/hello-hynoxcampus/30min"
+  // Open Calendly on tomorrow's date (never today)
+  const tomorrow = new Date()
+  tomorrow.setDate(tomorrow.getDate() + 1)
+  const tomorrowStr = tomorrow.toISOString().split('T')[0] // "YYYY-MM-DD"
+  const meetingLink = `https://calendly.com/hello-hynoxcampus/30min?date=${tomorrowStr}`
 
   return (
     <section className="relative py-24 bg-[#0F172A] overflow-hidden">

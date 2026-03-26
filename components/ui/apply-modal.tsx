@@ -3,7 +3,6 @@
 import { X, ChevronDown, CheckCircle2, Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useState, useRef, useEffect } from "react"
-import { applySubmit } from "@/actions/apply-submit"
 
 const COUNTRIES = [
   { code: "+91", iso: "in", name: "India" },
@@ -66,22 +65,27 @@ export default function ApplyModal({ isOpen, onClose, onSuccess }: ApplyModalPro
 
     if (isValid) {
       setIsSubmitting(true)
-      
       try {
-        const result = await applySubmit(
-          formData.name,
-          formData.email,
-          `${selectedCountry.code} ${formData.mobile}`
-        )
-        
-        if (result.success) {
+        const response = await fetch('/api/apply', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            mobile: `${selectedCountry.code} ${formData.mobile}`,
+          }),
+        })
+
+        if (response.ok) {
           setShowSuccess(true)
           if (onSuccess) onSuccess()
         } else {
-          alert("Submission failed. " + (result.message || "Please try again."))
+          const data = await response.json()
+          console.error('Server error:', data)
+          alert("Submission failed. Please try again.")
         }
       } catch (error) {
-        console.error("Failed to send email:", error)
+        console.error("Fetch error:", error)
         alert("Submission failed. Please try again.")
       } finally {
         setIsSubmitting(false)

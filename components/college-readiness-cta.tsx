@@ -7,8 +7,11 @@ import { useScrollAnimation } from "@/hooks/use-scroll-animation"
 export default function CollegeReadinessCta() {
   const [ref, isVisible] = useScrollAnimation()
 
-  // Your official Calendly booking link
-  const meetingLink = "https://calendly.com/hello-hynoxcampus/30min"
+  // Open Calendly on tomorrow's date (never today)
+  const tomorrow = new Date()
+  tomorrow.setDate(tomorrow.getDate() + 1)
+  const tomorrowStr = tomorrow.toISOString().split('T')[0] // "YYYY-MM-DD"
+  const meetingLink = `https://calendly.com/hello-hynoxcampus/30min?date=${tomorrowStr}`
 
   return (
     <section 
