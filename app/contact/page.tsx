@@ -33,24 +33,46 @@ export default function ContactPage() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    setIsSubmitting(true)
+
     const form = e.currentTarget
     const formData = new FormData(form)
+    
+    // Add specific fields for FormSubmit.co configuration
+    const data = {
+      email: formData.get("email"),
+      phone: `${selectedCountry.dial} ${formData.get("phone")}`,
+      message: formData.get("message"),
+      _subject: `New Contact Inquiry: ${formData.get("email")}`,
+      _template: "table", // Nice email layout
+      _captcha: "false"   // Disable captcha for better UX
+    }
 
-    const email = formData.get("email") as string
-    const phone = formData.get("phone") as string
-    const message = formData.get("message") as string
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/hello.hynoxcampus@gmail.com", {
+        method: "POST",
+        headers: { 
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify(data)
+      })
 
-    const subject = encodeURIComponent(`New Contact Inquiry from ${email}`)
-    const body = encodeURIComponent(
-      `Email: ${email}\nPhone: ${selectedCountry.dial} ${phone}\n\nMessage:\n${message}`
-    )
-
-    window.location.href = `mailto:hello.hynoxcampus@gmail.com?subject=${subject}&body=${body}`
-
-    form.reset()
-    setAgreed(false)
+      if (response.ok) {
+        alert("Message sent successfully! We will get back to you soon.")
+        form.reset()
+        setAgreed(false)
+      } else {
+        alert("Failed to send message. Please try again.")
+      }
+    } catch (error) {
+      console.error("Submission error:", error)
+      alert("Submission failed. Please check your internet connection.")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (

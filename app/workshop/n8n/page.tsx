@@ -106,7 +106,7 @@ const N8NWorkshop = () => {
     }
   }
 
-  const handlePaymentComplete = () => {
+  const handlePaymentComplete = async () => {
     let hasError = false
     
     if (!utrNumber || utrNumber.length < 10) {
@@ -135,17 +135,43 @@ const N8NWorkshop = () => {
       const experience = pendingFormData.get('experience') as string
       const pkg = selectedOption === 'standard' ? 'Standard (₹199)' : 'Premium (₹298)'
 
-      const subject = encodeURIComponent(`New Workshop Application: ${domain} - ${fullname}`)
-      const body = encodeURIComponent(
-        `Full Name: ${fullname}\nEmail: ${email}\nPhone: ${phone}\nCollege: ${college}\nYear: ${year}\nDomain: ${domain}\nExperience: ${experience}\nPackage: ${pkg}\nUTR / Transaction ID: ${utrNumber}\n\nNote: Payment screenshot sent separately by the applicant.`
-      )
+      const data = {
+        name: fullname,
+        email: email,
+        phone: phone,
+        college: college,
+        year: year,
+        domain: domain,
+        experience: experience,
+        package: pkg,
+        utr_number: utrNumber,
+        _subject: `New Workshop Application: ${domain} - ${fullname}`,
+        _template: "table",
+        _captcha: "false"
+      }
 
-      window.open(`mailto:hello.hynoxcampus@gmail.com?subject=${subject}&body=${body}`, '_blank')
+      try {
+        const response = await fetch("https://formsubmit.co/ajax/hello.hynoxcampus@gmail.com", {
+          method: "POST",
+          headers: { 
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify(data)
+        })
 
-      setTimeout(() => {
-        setShowPayment(false)
-        setFormStatus('success')
-      }, 500)
+        if (response.ok) {
+          setShowPayment(false)
+          setFormStatus('success')
+        } else {
+          alert("Submission failed. Please try again.")
+          setPaymentStatus('idle')
+        }
+      } catch (error) {
+        console.error("Submission error:", error)
+        alert("Submission failed. Please check internet.")
+        setPaymentStatus('idle')
+      }
     }
   }
 

@@ -53,7 +53,7 @@ export default function ApplyModal({ isOpen, onClose, onSuccess }: ApplyModalPro
     }
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const newErrors = { name: "", email: "", mobile: "" }
     let isValid = true
 
@@ -64,13 +64,39 @@ export default function ApplyModal({ isOpen, onClose, onSuccess }: ApplyModalPro
     setErrors(newErrors)
 
     if (isValid) {
-      const subject = encodeURIComponent(`New Sign-In / Discovery Session: ${formData.name}`)
-      const body = encodeURIComponent(
-        `Full Name: ${formData.name}\nEmail: ${formData.email}\nMobile: ${selectedCountry.code} ${formData.mobile}`
-      )
-      window.location.href = `mailto:hello.hynoxcampus@gmail.com?subject=${subject}&body=${body}`
-      setShowSuccess(true)
-      if (onSuccess) onSuccess()
+      setIsSubmitting(true)
+      
+      const data = {
+        name: formData.name,
+        email: formData.email,
+        mobile: `${selectedCountry.code} ${formData.mobile}`,
+        _subject: `New Sign-In / Partner Inquiry: ${formData.name}`,
+        _template: "table",
+        _captcha: "false"
+      }
+
+      try {
+        const response = await fetch("https://formsubmit.co/ajax/hello.hynoxcampus@gmail.com", {
+          method: "POST",
+          headers: { 
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify(data)
+        })
+
+        if (response.ok) {
+          setShowSuccess(true)
+          if (onSuccess) onSuccess()
+        } else {
+          alert("Submission failed. Please try again.")
+        }
+      } catch (error) {
+        console.error("Submission error:", error)
+        alert("Failed to send. Please check your internet.")
+      } finally {
+        setIsSubmitting(false)
+      }
     }
   }
 
