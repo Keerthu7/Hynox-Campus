@@ -79,7 +79,6 @@ export default function CollegeProgramsPage() {
       alert("Submission failed. Check your internet.");
     }
   };
-Transform: (none)
 
   return (
     <div className="flex flex-col min-h-screen font-poppins relative bg-white overflow-x-hidden">
