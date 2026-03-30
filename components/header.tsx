@@ -69,7 +69,7 @@ export default function Header() {
             <Link href="/" className="text-sm font-medium text-black hover:text-[#00C365] transition-colors">Home</Link>
             <Link href="/about" className="text-sm font-medium text-black hover:text-[#00C365] transition-colors">About</Link>
             <Link href="/programs" className="text-sm font-medium text-black hover:text-[#00C365] transition-colors">Programs</Link>
-            <Link href="https://campus-internship.vercel.app" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-black hover:text-[#00C365] transition-colors">Internship</Link>
+            <Link href="https://campus-internship.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-black hover:text-[#00C365] transition-colors">Internship</Link>
             <Link href="/workshop" className="text-sm font-medium text-black hover:text-[#00C365] transition-colors">Workshop</Link>
             <Link href="/contact" className="text-sm font-medium text-black hover:text-[#00C365] transition-colors">Contact</Link>
           </nav>
