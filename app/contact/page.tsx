@@ -22,7 +22,7 @@ const countries = [
 
 export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [agreed, setAgreed] = useState(false)
+  const [agreed, setAgreed] = useState(true)
   const [selectedCountry, setSelectedCountry] = useState(countries[0])
   const [isScrolled, setIsScrolled] = useState(false)
 
@@ -63,7 +63,7 @@ export default function ContactPage() {
       if (response.ok) {
         alert("Message sent successfully! We will get back to you soon.")
         form.reset()
-        setAgreed(false)
+        setAgreed(true)
       } else {
         alert("Failed to send message. Please try again.")
       }

@@ -35,7 +35,7 @@ const audienceData: AudienceCardItem[] = [
       "NEP 2020 aligned",
     ],
     // Points directly to your programs/page.tsx
-    link: "/programs", 
+    link: "/school-programs", 
   },
   {
     emoji: "🎓",
@@ -48,7 +48,7 @@ const audienceData: AudienceCardItem[] = [
       "Placement-oriented",
     ],
     // Points directly to your programs/page.tsx
-    link: "/programs", 
+    link: "/college-programs", 
   },
   {
     emoji: "🚀",
@@ -61,7 +61,7 @@ const audienceData: AudienceCardItem[] = [
       "Learn by building products",
     ],
     // Points directly to your programs/page.tsx
-    link: "/programs", 
+    link: "/programs/open", 
   },
 ]
 
