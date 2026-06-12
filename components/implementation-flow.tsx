@@ -6,10 +6,10 @@ import { useScrollAnimation } from "@/hooks/use-scroll-animation"
 const steps = [
   { number: "01", title: "Institutional Collaboration Discussion" },
   { number: "02", title: "Student Orientation & Stream Selection" },
-  { number: "03", title: "3-Month Skill Development" },
-  { number: "04", title: "Internship Allocation & Monitoring" },
-  { number: "05", title: "Performance Evaluation" },
-  { number: "06", title: "Career Support & Certification" },
+  { number: "03", title: "3-Month Course Learning" },
+  { number: "04", title: "48 Hours Hackathon" },
+  { number: "05", title: "Internship Allocation & Monitoring" },
+  { number: "06", title: "Certificate" },
 ]
 
 export default function ImplementationFlow() {

@@ -5,6 +5,7 @@ import Hero from "@/components/hero";
 import AudienceSection from "@/components/ui/whoIsHynoxCampus"; 
 import HynoxAudienceTracks from "@/components/ui/howHynoxWorks";
 import ProgramComparison from "@/components/ui/comparison";
+import Testimonials from "@/components/ui/testimonials";
 import FinalCTA from "@/components/ui/finalCTA";
 
 export default function Home() {
@@ -17,6 +18,7 @@ export default function Home() {
         <AudienceSection />
         <HynoxAudienceTracks />
         <ProgramComparison />
+        <Testimonials />
         <FinalCTA />
       </main>
       <Footer />

@@ -1,48 +1,75 @@
 "use client"
 
 import { useEffect } from "react"
-import { Code, Cloud, Brain } from "lucide-react"
+import { Code, Cloud, Brain, Cpu, ShieldCheck, Network } from "lucide-react"
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 
-const streams = [
+const specializations = [
   {
-    icon: <Code className="w-6 h-6 text-[#00C365]" />,
-    category: "Full-Stack Development",
-    level: "Level 1",
-    title: "Foundation Level",
-    focus: "Building the \"Logic\" of Business.",
+    icon: <Brain className="w-6 h-6 text-[#00C365]" />,
+    category: "Artificial Intelligence & Machine Learning",
+    focus: "Build predictive models, neural networks, and analytical architectures.",
     modules: [
-      "Python for Industrial Logic",
-      "Building \"Digital Employee\" Modules",
-      "Database Architecture for SMEs",
-      "Direct ERP Feature Ownership"
+      "Machine Learning Algorithms",
+      "Deep Learning & Neural Networks",
+      "Data Engineering & Analytics",
+      "Model Deployment & Monitoring"
     ]
   },
   {
-    icon: <Brain className="w-6 h-6 text-[#00C365]" />,
-    category: "AI & Machine Learning",
-    level: "Level 2",
-    title: "Professional Level",
-    focus: "Building \"Thinking\" Systems (Agents).",
+    icon: <Cpu className="w-6 h-6 text-[#00C365]" />,
+    category: "Generative AI & Prompt Engineering",
+    focus: "Design LLM workflows, intelligent agents, and multi-agent frameworks.",
     modules: [
-      "Agentic Reasoning (CrewAI & LangGraph)",
-      "Multi-Agent System Orchestration",
-      "Advanced RAG & Cognitive Memory",
-      "Automated Event Triggers & Actions"
+      "Prompt Optimization & Workflows",
+      "Agentic Orchestration (CrewAI/LangGraph)",
+      "Cognitive RAG & Vector Databases",
+      "LLM APIs & Custom Fine-Tuning"
+    ]
+  },
+  {
+    icon: <Code className="w-6 h-6 text-[#00C365]" />,
+    category: "Full Stack Development",
+    focus: "Develop end-to-end web architectures, backend systems, and web/mobile apps.",
+    modules: [
+      "Modern Frontend Frameworks",
+      "Serverless Backend Architectures",
+      "API Integration & Management",
+      "Cloud-Native Databases"
     ]
   },
   {
     icon: <Cloud className="w-6 h-6 text-[#00C365]" />,
     category: "Cloud Computing",
-    level: "Level 3",
-    title: "Enterprise Level",
-    focus: "Scaling AI to the Global Cloud.",
+    focus: "Deploy, secure, and manage scalable cloud platforms and infrastructure.",
     modules: [
-      "Scalable SaaS Infrastructure Design",
-      "Docker & Production Deployment",
-      "AI Security & Data Governance",
-      "Enterprise-Grade ERP Integration"
+      "AWS & Cloud Architecture",
+      "CI/CD Deployment Pipelines",
+      "Docker & Containerization",
+      "Security & Governance Rules"
+    ]
+  },
+  {
+    icon: <Network className="w-6 h-6 text-[#00C365]" />,
+    category: "Automation Engineering",
+    focus: "Streamline processes using event-driven tools, custom scripting, and integrations.",
+    modules: [
+      "Intelligent Workflow Orchestration",
+      "n8n & Zapier Automations",
+      "Custom Scripting & Webhooks",
+      "System Integration & Alerts"
+    ]
+  },
+  {
+    icon: <ShieldCheck className="w-6 h-6 text-[#00C365]" />,
+    category: "Blockchain Technologies",
+    focus: "Build decentralized applications, smart contracts, and Web3 solutions.",
+    modules: [
+      "Smart Contract Development",
+      "Decentralized Applications (DApps)",
+      "Web3 APIs & Wallets",
+      "Cryptographic Security & Ledgers"
     ]
   }
 ]
@@ -54,7 +81,7 @@ export default function CollegeStreams() {
   }, [])
 
   return (
-    <section id="streams" className="py-16 bg-white relative z-10 overflow-hidden min-h-[650px] flex items-center">
+    <section id="streams" className="py-24 bg-white relative z-10 overflow-hidden">
       
       {/* --- BACKGROUND: LIGHT GRID PATTERN --- */}
       <div 
@@ -71,7 +98,7 @@ export default function CollegeStreams() {
       <div className="container mx-auto px-6 max-w-7xl relative z-10">
         
         {/* Header Section */}
-        <div className="text-center mb-12 space-y-3">
+        <div className="text-center mb-16 space-y-4">
           <span 
             className="text-[12px] font-bold tracking-[0.2em] text-[#00C365] uppercase block"
             data-aos="fade-up"
@@ -80,58 +107,60 @@ export default function CollegeStreams() {
           </span>
           
           <h2 
-            className="text-3xl md:text-4xl font-bold tracking-tight text-[#0f111a]"
+            className="text-3xl md:text-5xl font-extrabold tracking-tight text-[#0f111a]"
             data-aos="fade-up"
             data-aos-delay="100"
           >
-            One Program. <span className="text-[#00C365]">Three Professional Levels.</span>
+            High-Demand Specializations
           </h2>
           <p 
-            className="text-slate-500 text-base font-medium max-w-2xl mx-auto mt-2"
+            className="text-slate-500 text-sm md:text-base font-medium max-w-2xl mx-auto mt-2"
             data-aos="fade-up"
             data-aos-delay="150"
           >
-            Master the transition from code to autonomous industry solutions.
+            Explore the 6 core technological domains integrated into the Hynox ISDIP program.
           </p>
         </div>
 
-        {/* Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {streams.map((stream, index) => (
+        {/* Cards Grid - 3 Columns on desktop, 6 cards total */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          {specializations.map((stream, index) => (
             <div 
               key={index}
               data-aos="fade-up"
-              data-aos-delay={200 + (index * 150)}
-              className="group bg-[#161b2c] border border-white/5 p-8 rounded-[2rem] hover:border-[#00C365]/30 hover:shadow-2xl hover:shadow-[#00C365]/5 transition-all duration-300 hover:-translate-y-2 cursor-default flex flex-col h-full"
+              data-aos-delay={200 + (index * 100)}
+              className="group bg-[#161b2c] border border-white/5 p-8 rounded-[2rem] hover:border-[#00C365]/30 hover:shadow-2xl hover:shadow-[#00C365]/5 transition-all duration-300 hover:-translate-y-2 cursor-default flex flex-col h-full relative overflow-hidden"
             >
-              <div className="flex justify-between items-start mb-6">
+              {/* Card Ambient Glow */}
+              <div className="absolute top-0 right-0 w-[150px] h-[150px] bg-[#00C365]/5 rounded-full blur-[50px] pointer-events-none" />
+
+              <div className="flex justify-between items-start mb-6 relative z-10">
                 <div className="w-12 h-12 bg-[#00C365]/10 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                   {stream.icon}
                 </div>
-                <span className="text-[12px] font-bold text-white uppercase tracking-[0.2em]">
-                  {stream.level}
+                <span className="text-[9px] font-bold text-[#00C365] uppercase tracking-widest bg-[#00C365]/10 px-2 py-0.5 rounded-full">
+                  Domain
                 </span>
               </div>
               
-              <div className="mb-6">
-                <h3 className="text-xl font-bold text-white mb-1 group-hover:text-[#00C365] transition-colors leading-tight">
+              <div className="mb-6 relative z-10">
+                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-[#00C365] transition-colors leading-tight">
                   {stream.category}
                 </h3>
               </div>
 
-              <div className="mb-6 pt-6 border-t border-white/5">
-                <p className="text-white/40 text-[10px] font-bold uppercase tracking-widest mb-2">The Focus:</p>
-                <p className="text-slate-300 text-sm font-semibold leading-relaxed">
+              <div className="mb-6 pt-5 border-t border-white/5 relative z-10">
+                <p className="text-slate-300 text-xs font-semibold leading-relaxed">
                   {stream.focus}
                 </p>
               </div>
               
-              <div className="mt-auto">
-                <p className="text-white/40 text-[10px] font-bold uppercase tracking-widest mb-4">Key Modules:</p>
-                <ul className="space-y-3">
+              <div className="mt-auto relative z-10">
+                <p className="text-white/40 text-[9px] font-bold uppercase tracking-widest mb-3">Key Focus Modules:</p>
+                <ul className="space-y-2">
                   {stream.modules.map((item, i) => (
-                    <li key={i} className="flex items-start gap-4 text-slate-400 font-medium text-sm group-hover:text-slate-300 transition-colors leading-relaxed">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#00C365]/50 group-hover:bg-[#00C365] mt-2 shrink-0" />
+                    <li key={i} className="flex items-start gap-3 text-slate-400 font-medium text-xs group-hover:text-slate-300 transition-colors leading-relaxed">
+                      <span className="w-1 h-1 rounded-full bg-[#00C365]/50 group-hover:bg-[#00C365] mt-2 shrink-0" />
                       {item}
                     </li>
                   ))}

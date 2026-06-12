@@ -5,13 +5,14 @@ import { Check } from "lucide-react"
 import { useScrollAnimation } from "@/hooks/use-scroll-animation"
 
 const internshipFeatures = [
-  "Online Internship Projects",
-  "Offline Industry Exposure (Where Applicable)",
-  "Practical Task-Based Execution",
-  "Weekly Mentor Reviews",
-  "KPI-Based Evaluation",
-  "Paid & Unpaid Internship Opportunities",
-  "Performance-Based Job Support"
+  "Production-Ready Projects",
+  "Professional GitHub Portfolio",
+  "Open-Source Contributions",
+  "Industry-Standard Resume",
+  "Technical Documentation Skills",
+  "Internship Experience",
+  "Industry Certifications",
+  "Enhanced Employability"
 ]
 
 export default function InternshipPhase() {
@@ -56,7 +57,7 @@ export default function InternshipPhase() {
             transition={{ delay: 0.3 }}
             className="mb-4 text-3xl font-bold tracking-tight text-[#0f111a] md:text-4xl" // Reduced text size slightly
           >
-            Structured Industry Internship
+            Production Lab Internship (6 Months)
           </motion.h2>
           
           <motion.p 
@@ -65,7 +66,7 @@ export default function InternshipPhase() {
             transition={{ delay: 0.4 }}
             className="text-slate-500 text-sm md:text-base max-w-2xl mx-auto leading-relaxed font-medium" // Reduced text size
           >
-            Students transition into real-time industry projects with structured mentoring and performance tracking.
+            Qualified students join the Hynox Production Lab to work on live projects, deployment environments, and real-world engineering challenges under continuous mentorship.
           </motion.p>
         </motion.div>
 

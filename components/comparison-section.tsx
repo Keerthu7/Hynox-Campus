@@ -4,7 +4,7 @@ import { motion } from "framer-motion"
 import { useScrollAnimation } from "@/hooks/use-scroll-animation"
 
 const rows = [
-  { feature: "Duration", typical: "1-2 Months", hynox: "Structured 9-Month Model" },
+  { feature: "Duration", typical: "1-2 Months", hynox: "Structured (3 Month + 6 Month) Model" },
   { feature: "Internship", typical: "Not Assured", hynox: "100% Internship Opportunity" },
   { feature: "Industry Exposure", typical: "Theoretical", hynox: "Real-Time Projects + KPI Tracking" },
   { feature: "Portfolio", typical: "Basic Assignments", hynox: "Live Client-Based Portfolio" },

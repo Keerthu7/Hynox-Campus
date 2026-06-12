@@ -44,6 +44,7 @@ export default function ContactPage() {
     const data = {
       email: formData.get("email"),
       phone: `${selectedCountry.dial} ${formData.get("phone")}`,
+      userType: formData.get("userType"),
       message: formData.get("message"),
       _subject: `New Contact Inquiry: ${formData.get("email")}`,
       _template: "table", // Nice email layout
@@ -158,6 +159,27 @@ export default function ContactPage() {
                       className="w-full bg-white border-slate-200 h-12 rounded-xl text-slate-900 focus-visible:ring-[#00C365] shadow-sm"
                       required 
                     />
+                  </div>
+                </div>
+
+                <div className="space-y-2" data-aos="fade-up" data-aos-delay="250">
+                  <label htmlFor="userType" className="text-sm font-bold text-slate-700">Category</label>
+                  <div className="relative">
+                    <select
+                      id="userType"
+                      name="userType"
+                      required
+                      defaultValue=""
+                      className="w-full bg-white border border-slate-200 h-12 px-4 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#00C365] focus:border-transparent appearance-none shadow-sm pr-10"
+                    >
+                      <option value="" disabled>Select your profile</option>
+                      <option value="School">School Student</option>
+                      <option value="College">College Student</option>
+                      <option value="Open Learner">Open Learner</option>
+                    </select>
+                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-400">
+                      <ChevronDown size={18} />
+                    </div>
                   </div>
                 </div>
 

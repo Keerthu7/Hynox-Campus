@@ -5,21 +5,19 @@ import { Building2, GraduationCap } from "lucide-react"
 import { useScrollAnimation } from "@/hooks/use-scroll-animation"
 
 const collegeBenefits = [
-  "Improved Placement Metrics",
-  "Industry Collaboration Framework",
-  "Enhanced NAAC/NIRF Positioning",
-  "Employability-Focused Curriculum",
-  "Structured Internship Pipeline",
-  "Increased Institutional Credibility"
+  "IP & Co-Creation Hub (Products, Open Source & Startups)",
+  "Improved Placement Outcomes (Hands-on, confident graduates)",
+  "Industry-Academia Collaboration (Mentorship & Real products)",
+  "NAAC & Accreditation Support (Supports innovation & engagement criteria)"
 ]
 
 const studentBenefits = [
-  "Real Industry Exposure",
-  "Portfolio Development",
-  "Internship Opportunity (T&C Apply)",
-  "Career-Ready Skillset",
-  "Interview Preparation",
-  "Performance-Based Growth"
+  "Course Certificate (Structured learning credential)",
+  "Hackathon Certificate (48-Hour innovation gateway)",
+  "Internship Certificate (6-Month production lab credential)",
+  "Professional GitHub Portfolio (Public repositories & contributions)",
+  "Industry-Standard Resume (ATS-compliant modern standards)",
+  "Corporate Readiness Scorecard (Continuous evaluation metrics)"
 ]
 
 export default function CollegeBenefits() {

@@ -1,26 +1,25 @@
 "use client"
 
 import { useEffect } from "react"
-import { BookOpen, Briefcase, TrendingUp } from "lucide-react"
+import { BookOpen, Briefcase, Trophy } from "lucide-react"
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 
 const modelFeatures = [
   {
-    // Updated Icon color to Green to match the new theme
     icon: <BookOpen className="w-6 h-6 text-[#00C365]" />, 
-    title: "3-Month Skill Development",
-    description: "Intensive, project-based training with industry mentors building core competencies across chosen specialization."
+    title: "Phase 1: Course Learning (3 Months)",
+    description: "Intensive training in AI/ML, GenAI, Full Stack, Cloud, Automation, and Blockchain under experts with 3–15+ years experience."
+  },
+  {
+    icon: <Trophy className="w-6 h-6 text-[#00C365]" />,
+    title: "48-Hour Innovation Hackathon",
+    description: "A mandatory selection gateway. Top-performing students get direct entry into the 6-Month Production Lab Internship without assessments."
   },
   {
     icon: <Briefcase className="w-6 h-6 text-[#00C365]" />,
-    title: "6-Month Internship Integration",
-    description: "Structured industry exposure through real-time projects, KPI tracking, and dedicated mentor reviews."
-  },
-  {
-    icon: <TrendingUp className="w-6 h-6 text-[#00C365]" />,
-    title: "Performance-Based Career Pathway",
-    description: "Career support, interview preparation, and job pathway access driven by measurable performance outcomes."
+    title: "Phase 2: Production Lab (6 Months)",
+    description: "Qualified students join the Hynox Production Lab to work on live projects, staging deployment pipelines, and real engineering challenges."
   }
 ]
 
