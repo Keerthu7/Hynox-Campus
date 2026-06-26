@@ -22,7 +22,7 @@ export default function Header() {
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
     { name: "Programs", href: "/programs" },
-    { name: "Internship", href: "https://campus-internship.vercel.app/" },
+    { name: "Internship", href: "/internship" },
     { name: "Workshop", href: "/workshop" },
     { name: "Contact", href: "/contact" },
   ];
@@ -73,8 +73,7 @@ export default function Header() {
                 key={item.name}
                 href={item.href}
                 onClick={(e) => handleScrollClick(e, item.href)}
-                target={item.name === "Internship" ? "_blank" : undefined}
-                rel={item.name === "Internship" ? "noopener noreferrer" : undefined}
+
                 className="text-sm font-medium text-black hover:text-[#00C365] transition-colors whitespace-nowrap"
               >
                 {item.name}
@@ -111,8 +110,7 @@ export default function Header() {
                     handleScrollClick(e, item.href);
                     if (!item.href.startsWith("#")) setMobileMenuOpen(false);
                   }}
-                  target={item.name === "Internship" ? "_blank" : undefined}
-                  rel={item.name === "Internship" ? "noopener noreferrer" : undefined}
+
                   className="text-lg font-bold text-black hover:text-[#00C365] py-2 border-b border-gray-100"
                 >
                   {item.name}

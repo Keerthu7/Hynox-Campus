@@ -25,7 +25,7 @@ export default function Header() {
   const getPath = (item: string) => {
     if (item === "Home") return "/";
     if (item === "Programs") return "/programs";
-    if (item === "Internship") return "https://campus-internship.vercel.app/";
+    if (item === "Internship") return "/internship";
     if (item === "Workshop") return "/workshop";
     return `/${item.toLowerCase()}`;
   };
@@ -69,7 +69,7 @@ export default function Header() {
             <Link href="/" className="text-sm font-medium text-black hover:text-[#00C365] transition-colors">Home</Link>
             <Link href="/about" className="text-sm font-medium text-black hover:text-[#00C365] transition-colors">About</Link>
             <Link href="/programs" className="text-sm font-medium text-black hover:text-[#00C365] transition-colors">Programs</Link>
-            <Link href="https://campus-internship.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-black hover:text-[#00C365] transition-colors">Internship</Link>
+            <Link href="/internship" className="text-sm font-medium text-black hover:text-[#00C365] transition-colors">Internship</Link>
             <Link href="/workshop" className="text-sm font-medium text-black hover:text-[#00C365] transition-colors">Workshop</Link>
             <Link href="/contact" className="text-sm font-medium text-black hover:text-[#00C365] transition-colors">Contact</Link>
           </nav>
@@ -92,8 +92,6 @@ export default function Header() {
                 <Link
                   key={item}
                   href={getPath(item)}
-                  target={item === "Internship" ? "_blank" : undefined}
-                  rel={item === "Internship" ? "noopener noreferrer" : undefined}
                   onClick={() => setMobileMenuOpen(false)}
                   className="text-lg font-bold text-black hover:text-[#00C365] transition-colors border-b border-gray-100 pb-2"
                 >
